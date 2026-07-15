@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Geoffrey v4.0 - AI-Powered Defensive Cybersecurity Dashboard">
+<meta name="description" content="Geoffrey v5.0 - Enterprise-Grade AI Cybersecurity Platform">
 <meta name="author" content="IAMHGW">
-<title>GEOFFREY v4.0 - Athena's Guardian</title>
+<title>GEOFFREY v5.0 - Enterprise Security Platform</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -40,8 +40,8 @@ body {
 
 .owl-container {
     position: relative;
-    width: 200px;
-    height: 200px;
+    width: 220px;
+    height: 220px;
     animation: float 3s ease-in-out infinite;
 }
 
@@ -50,131 +50,248 @@ body {
     50% { transform: translateY(-20px); }
 }
 
-.owl {
+/* Polished SVG-style Owl */
+.owl-svg {
     width: 100%;
     height: 100%;
-    position: relative;
+    filter: drop-shadow(0 15px 30px rgba(0,0,0,0.6));
 }
 
-.owl-body {
-    width: 140px;
-    height: 160px;
-    background: linear-gradient(145deg, #8B7355 0%, #654321 100%);
-    border-radius: 50% 50% 40% 40%;
+.owl-body-main {
+    width: 160px;
+    height: 180px;
+    background: linear-gradient(145deg, #B8956A 0%, #9B7E52 50%, #7A6442 100%);
+    border-radius: 50% 50% 42% 42%;
     position: absolute;
-    top: 40px;
+    top: 50px;
     left: 30px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    box-shadow: inset 0 -10px 30px rgba(0,0,0,0.3),
+                0 20px 50px rgba(0,0,0,0.5);
+    border: 3px solid #654321;
 }
 
-.owl-head {
-    width: 120px;
+.chest-feather {
+    width: 80px;
     height: 100px;
-    background: linear-gradient(145deg, #A0826D 0%, #8B7355 100%);
-    border-radius: 50% 50% 45% 45%;
+    background: linear-gradient(180deg, #D4B896 0%, #C4A882 100%);
+    border-radius: 40% 40% 50% 50%;
     position: absolute;
-    top: 10px;
+    bottom: 20px;
     left: 40px;
+    box-shadow: inset 0 5px 15px rgba(255,255,255,0.2);
 }
 
-.ear {
+.owl-head-main {
+    width: 140px;
+    height: 120px;
+    background: linear-gradient(145deg, #C4A882 0%, #B8956A 50%, #9B7E52 100%);
+    border-radius: 50% 50% 48% 48%;
+    position: absolute;
+    top: 15px;
+    left: 40px;
+    box-shadow: inset 0 5px 20px rgba(255,255,255,0.15),
+                0 10px 35px rgba(0,0,0,0.4);
+    border: 2px solid #8B7355;
+}
+
+/* Stylized Ears/Tufts */
+.ear-tuft {
     width: 0;
     height: 0;
-    border-left: 15px solid transparent;
-    border-right: 15px solid transparent;
-    border-bottom: 35px solid #8B7355;
+    border-left: 18px solid transparent;
+    border-right: 18px solid transparent;
+    border-bottom: 45px solid #9B7E52;
     position: absolute;
-    top: -5px;
+    top: -8px;
+    filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3));
 }
 
-.ear.left { left: 15px; transform: rotate(-10deg); }
-.ear.right { right: 15px; transform: rotate(10deg); }
+.ear-tuft::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 14px solid transparent;
+    border-right: 14px solid transparent;
+    border-bottom: 35px solid #B8956A;
+    top: 5px;
+    left: -14px;
+}
 
-.eyes {
+.ear-tuft.left { left: 20px; transform: rotate(-12deg); }
+.ear-tuft.right { right: 20px; transform: rotate(12deg); }
+
+/* Enhanced Eyes */
+.eyes-container {
     display: flex;
-    gap: 20px;
+    gap: 22px;
     position: absolute;
-    top: 35px;
-    left: 25px;
+    top: 42px;
+    left: 28px;
 }
 
-.eye {
-    width: 30px;
-    height: 35px;
+.eye-outer {
+    width: 38px;
+    height: 42px;
     background: white;
     border-radius: 50%;
     position: relative;
-    box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
-    animation: blink 4s infinite;
+    box-shadow: inset 0 3px 8px rgba(0,0,0,0.15),
+                0 4px 10px rgba(255,255,255,0.4);
+    border: 2px solid #333;
+    animation: blink 5s infinite;
 }
 
 @keyframes blink {
-    0%, 48%, 52%, 100% { height: 35px; }
-    50% { height: 3px; }
+    0%, 48%, 52%, 100% { height: 42px; transform: scaleY(1); }
+    50% { height: 4px; transform: scaleY(0.1); }
+}
+
+.eye-iris {
+    width: 20px;
+    height: 24px;
+    background: radial-gradient(circle at 30% 30%, #FF8C00 0%, #CC6600 50%, #994400 100%);
+    border-radius: 50%;
+    position: absolute;
+    top: 9px;
+    left: 9px;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.4);
 }
 
 .pupil {
-    width: 12px;
-    height: 15px;
-    background: #2c3e50;
+    width: 10px;
+    height: 14px;
+    background: #000;
     border-radius: 50%;
     position: absolute;
-    top: 10px;
-    left: 9px;
-    animation: lookAround 6s infinite;
+    top: 5px;
+    left: 5px;
+    animation: lookAround 7s infinite;
+}
+
+.eye-shine {
+    width: 6px;
+    height: 6px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 3px;
+    opacity: 0.9;
 }
 
 @keyframes lookAround {
     0%, 100% { transform: translate(0, 0); }
-    25% { transform: translate(3px, -2px); }
-    50% { transform: translate(-3px, 0); }
-    75% { transform: translate(0, 2px); }
+    20% { transform: translate(3px, -2px); }
+    40% { transform: translate(-2px, 1px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(-3px, -1px); }
 }
 
-.beak {
+/* Polished Beak */
+.beak-main {
     width: 0;
     height: 0;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-top: 15px solid #FFA500;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-top: 20px solid #FFA500;
     position: absolute;
-    top: 60px;
-    left: 52px;
+    top: 75px;
+    left: 58px;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
 }
 
-.wing {
-    width: 50px;
-    height: 70px;
-    background: #654321;
-    border-radius: 0 50% 50% 0;
+.beak-main::after {
+    content: '';
     position: absolute;
-    top: 80px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 16px solid #FFB733;
+    top: -20px;
+    left: -10px;
 }
 
-.wing.left {
-    left: -15px;
-    transform: rotate(-20deg);
-    animation: flapLeft 2s ease-in-out infinite;
+/* Enhanced Wings */
+.wing-detailed {
+    width: 60px;
+    height: 85px;
+    background: linear-gradient(145deg, #8B7355 0%, #654321 100%);
+    border-radius: 0 55% 55% 0;
+    position: absolute;
+    top: 95px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4),
+                inset 0 -5px 10px rgba(0,0,0,0.3);
+    border: 2px solid #5A3A1F;
 }
 
-.wing.right {
-    right: -15px;
-    transform: rotate(20deg) scaleX(-1);
-    animation: flapRight 2s ease-in-out infinite;
+.wing-feathers {
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 8px,
+        rgba(0,0,0,0.1) 8px,
+        rgba(0,0,0,0.1) 10px
+    );
+    border-radius: 0 55% 55% 0;
+}
+
+.wing-detailed.left {
+    left: -20px;
+    transform: rotate(-25deg);
+    animation: flapLeft 2.5s ease-in-out infinite;
+}
+
+.wing-detailed.right {
+    right: -20px;
+    transform: rotate(25deg) scaleX(-1);
+    animation: flapRight 2.5s ease-in-out infinite;
 }
 
 @keyframes flapLeft {
-    0%, 100% { transform: rotate(-20deg); }
-    50% { transform: rotate(-35deg); }
+    0%, 100% { transform: rotate(-25deg); }
+    50% { transform: rotate(-40deg); }
 }
 
 @keyframes flapRight {
-    0%, 100% { transform: rotate(20deg) scaleX(-1); }
-    50% { transform: rotate(35deg) scaleX(-1); }
+    0%, 100% { transform: rotate(25deg) scaleX(-1); }
+    50% { transform: rotate(40deg) scaleX(-1); }
+}
+
+/* Talons */
+.talons {
+    position: absolute;
+    bottom: -15px;
+    left: 70px;
+    display: flex;
+    gap: 8px;
+}
+
+.talon {
+    width: 25px;
+    height: 30px;
+    background: linear-gradient(145deg, #8B7355 0%, #654321 100%);
+    border-radius: 0 0 45% 45%;
+    position: relative;
+}
+
+.talon::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 12px;
+    background: #3A2410;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 0 0 50% 50%;
 }
 
 .intro-text {
-    margin-top: 40px;
+    margin-top: 50px;
     text-align: center;
     animation: fadeInUp 1s ease-out 0.5s both;
 }
@@ -191,39 +308,58 @@ body {
 }
 
 .intro-text h1 {
-    font-size: 3em;
-    color: #FFA500;
-    text-shadow: 0 0 30px rgba(255,165,0,0.6);
+    font-size: 3.5em;
+    background: linear-gradient(135deg, #FFA500 0%, #FF6347 50%, #FF1493 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 40px rgba(255,165,0,0.5);
     margin-bottom: 15px;
-    letter-spacing: 3px;
+    letter-spacing: 4px;
+    font-weight: 900;
 }
 
-.intro-text p {
-    font-size: 1.2em;
+.intro-text .tagline {
+    font-size: 1.4em;
     color: #a8b2d1;
     margin-bottom: 10px;
+    font-weight: 300;
 }
 
-.intro-text .version {
+.intro-text .version-main {
     color: #7B68EE;
-    font-size: 0.9em;
-    margin-top: 20px;
+    font-size: 1.1em;
+    margin-top: 15px;
+    font-weight: 600;
+}
+
+.enterprise-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-size: 0.85em;
+    margin-top: 15px;
+    border: 2px solid #8B7EC8;
+    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
 }
 
 .loading-bar {
-    width: 300px;
-    height: 4px;
+    width: 350px;
+    height: 6px;
     background: rgba(255,255,255,0.1);
-    border-radius: 2px;
+    border-radius: 3px;
     overflow: hidden;
     margin: 30px auto;
+    border: 1px solid rgba(255,255,255,0.2);
 }
 
 .loading-bar-fill {
     height: 100%;
-    background: linear-gradient(90deg, #FFA500, #FF6347);
-    border-radius: 2px;
+    background: linear-gradient(90deg, #FFA500, #FF6347, #FF1493);
+    border-radius: 3px;
     animation: loading 3s ease-out forwards;
+    box-shadow: 0 0 10px rgba(255,165,0,0.6);
 }
 
 @keyframes loading {
@@ -233,7 +369,7 @@ body {
 
 /* Main Dashboard */
 .container {
-    max-width: 1400px;
+    max-width: 1600px;
     margin: 0 auto;
     padding: 20px;
     opacity: 0;
@@ -247,71 +383,108 @@ body {
 
 .header {
     text-align: center;
-    padding: 30px 0;
-    border-bottom: 2px solid rgba(255,165,0,0.3);
-    margin-bottom: 30px;
+    padding: 35px 0;
+    border-bottom: 3px solid rgba(255,165,0,0.4);
+    margin-bottom: 35px;
+    background: rgba(0,0,0,0.2);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
 .header h1 {
-    font-size: 2.5em;
-    color: #FFA500;
-    text-shadow: 0 0 20px rgba(255,165,0,0.5);
+    font-size: 3em;
+    background: linear-gradient(135deg, #FFA500 0%, #FF6347 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 15px;
+    gap: 20px;
+    font-weight: 900;
+    text-shadow: 0 5px 15px rgba(255,165,0,0.3);
 }
 
 .header-icon {
-    font-size: 0.8em;
+    font-size: 0.75em;
+    filter: drop-shadow(0 2px 5px rgba(255,165,0,0.5));
 }
 
 .header .subtitle {
     color: #a8b2d1;
-    margin-top: 10px;
-    font-size: 1.1em;
+    margin-top: 12px;
+    font-size: 1.3em;
+    font-weight: 300;
 }
 
 .header .version-badge {
     display: inline-block;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    padding: 5px 15px;
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-size: 0.85em;
+    margin-top: 12px;
+    border: 2px solid rgba(255,255,255,0.2);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+}
+
+.enterprise-banner {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.enterprise-stat {
+    padding: 8px 18px;
+    background: rgba(255,255,255,0.05);
     border-radius: 20px;
-    font-size: 0.8em;
-    margin-top: 10px;
+    font-size: 0.9em;
+    border: 1px solid rgba(255,165,0,0.3);
+}
+
+.enterprise-stat strong {
+    color: #FFA500;
+    margin-right: 5px;
 }
 
 /* Tab Navigation */
 .tab-nav {
     display: flex;
-    gap: 10px;
-    margin-bottom: 30px;
-    border-bottom: 2px solid rgba(255,255,255,0.1);
+    gap: 12px;
+    margin-bottom: 35px;
+    border-bottom: 3px solid rgba(255,255,255,0.1);
     padding-bottom: 0;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .tab-button {
-    padding: 12px 30px;
+    padding: 14px 35px;
     background: rgba(255,255,255,0.05);
-    border: none;
+    border: 2px solid rgba(255,255,255,0.1);
     color: #a8b2d1;
     cursor: pointer;
     transition: all 0.3s ease;
-    border-radius: 10px 10px 0 0;
-    font-size: 1em;
+    border-radius: 12px 12px 0 0;
+    font-size: 1.05em;
+    font-weight: 600;
     position: relative;
 }
 
 .tab-button:hover {
-    background: rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.12);
     color: #FFA500;
+    transform: translateY(-2px);
+    border-color: rgba(255,165,0,0.3);
 }
 
 .tab-button.active {
     background: linear-gradient(135deg, #FFA500, #FF6347);
     color: white;
-    box-shadow: 0 -3px 20px rgba(255,165,0,0.4);
+    box-shadow: 0 -5px 25px rgba(255,165,0,0.5);
+    border-color: transparent;
 }
 
 .tab-content {
@@ -337,140 +510,241 @@ body {
 /* Stats Grid */
 .stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    margin-bottom: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-bottom: 35px;
 }
 
 .stat-card {
-    background: rgba(255,255,255,0.05);
-    padding: 20px;
-    border-radius: 15px;
-    border: 1px solid rgba(255,255,255,0.1);
+    background: linear-gradient(145deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%);
+    padding: 25px;
+    border-radius: 18px;
+    border: 2px solid rgba(255,255,255,0.1);
     transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,165,0,0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.stat-card:hover::before {
+    left: 100%;
 }
 
 .stat-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    border-color: rgba(255,165,0,0.5);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+    border-color: rgba(255,165,0,0.6);
 }
 
 .stat-card h3 {
     color: #a8b2d1;
-    font-size: 0.9em;
+    font-size: 0.95em;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 10px;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+    font-weight: 700;
 }
 
 .stat-value {
-    font-size: 2.5em;
-    font-weight: bold;
-    color: #FFA500;
-    text-shadow: 0 0 10px rgba(255,165,0,0.3);
+    font-size: 3em;
+    font-weight: 900;
+    background: linear-gradient(135deg, #FFA500 0%, #FF6347 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 15px rgba(255,165,0,0.3);
 }
 
 .stat-change {
-    font-size: 0.9em;
-    margin-top: 8px;
+    font-size: 0.95em;
+    margin-top: 10px;
+    font-weight: 600;
 }
 
 .stat-change.positive { color: #4CAF50; }
 .stat-change.negative { color: #f44336; }
 
-/* Threat Feed */
+/* Threat Feed - Enterprise */
 .threat-feed {
-    background: rgba(255,255,255,0.05);
-    padding: 25px;
-    border-radius: 15px;
-    border: 1px solid rgba(255,255,255,0.1);
-    margin-bottom: 20px;
+    background: linear-gradient(145deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%);
+    padding: 30px;
+    border-radius: 18px;
+    border: 2px solid rgba(255,255,255,0.1);
+    margin-bottom: 25px;
 }
 
 .threat-feed h2 {
     color: #FFA500;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
+    font-size: 1.6em;
+    font-weight: 700;
 }
 
 .threat-card {
-    background: rgba(0,0,0,0.3);
-    padding: 20px;
-    border-radius: 12px;
-    border-left: 4px solid;
-    margin-bottom: 15px;
+    background: rgba(0,0,0,0.4);
+    padding: 25px;
+    border-radius: 15px;
+    border-left: 5px solid;
+    margin-bottom: 20px;
     transition: all 0.3s ease;
     cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.threat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -10px;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+    border-radius: 50%;
 }
 
 .threat-card:hover {
-    transform: translateX(10px);
-    background: rgba(0,0,0,0.5);
+    transform: translateX(15px) scale(1.02);
+    background: rgba(0,0,0,0.6);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
-.threat-card.critical { border-left-color: #f44336; }
-.threat-card.high { border-left-color: #ff9800; }
-.threat-card.medium { border-left-color: #ffeb3b; }
-.threat-card.low { border-left-color: #4CAF50; }
+.threat-card.critical { 
+    border-left-color: #f44336;
+    box-shadow: 0 0 20px rgba(244, 67, 54, 0.2);
+}
+.threat-card.high { 
+    border-left-color: #ff9800;
+    box-shadow: 0 0 20px rgba(255, 152, 0, 0.2);
+}
+.threat-card.medium { 
+    border-left-color: #ffeb3b;
+    box-shadow: 0 0 20px rgba(255, 235, 59, 0.1);
+}
+.threat-card.low { 
+    border-left-color: #4CAF50;
+    box-shadow: 0 0 20px rgba(76, 175, 80, 0.1);
+}
 
 .threat-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .threat-title {
-    font-size: 1.1em;
+    font-size: 1.3em;
     color: white;
-    font-weight: bold;
+    font-weight: 700;
 }
 
 .threat-severity {
-    padding: 4px 12px;
-    border-radius: 12px;
-    font-size: 0.8em;
-    font-weight: bold;
+    padding: 6px 16px;
+    border-radius: 15px;
+    font-size: 0.85em;
+    font-weight: 800;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-.threat-severity.critical { background: #f44336; }
-.threat-severity.high { background: #ff9800; }
+.threat-severity.critical { background: #f44336; color: white; }
+.threat-severity.high { background: #ff9800; color: white; }
 .threat-severity.medium { background: #ffeb3b; color: #333; }
-.threat-severity.low { background: #4CAF50; }
+.threat-severity.low { background: #4CAF50; color: white; }
 
 .threat-description {
     color: #a8b2d1;
-    margin-bottom: 10px;
-    line-height: 1.5;
+    margin-bottom: 15px;
+    line-height: 1.6;
+    font-size: 1.05em;
+}
+
+.threat-intel-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin: 15px 0;
+    padding: 15px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 10px;
+}
+
+.intel-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.intel-label {
+    font-size: 0.8em;
+    color: #7B68EE;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.intel-value {
+    color: #FFA500;
+    font-weight: 600;
+    font-size: 1.05em;
 }
 
 .threat-meta {
     display: flex;
-    gap: 20px;
-    font-size: 0.85em;
+    gap: 25px;
+    font-size: 0.9em;
     color: #7B68EE;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+.threat-meta span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
 .threat-actions {
     display: flex;
-    gap: 10px;
-    margin-top: 15px;
+    gap: 12px;
+    margin-top: 18px;
+    flex-wrap: wrap;
 }
 
 .threat-action-btn {
-    padding: 8px 16px;
+    padding: 10px 20px;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 0.9em;
+    font-size: 0.95em;
+    font-weight: 700;
     transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-.btn-seal {
+.btn-quarantine {
+    background: linear-gradient(135deg, #f44336, #d32f2f);
+    color: white;
+}
+
+.btn-block {
     background: linear-gradient(135deg, #667eea, #764ba2);
     color: white;
 }
@@ -485,83 +759,185 @@ body {
     color: white;
 }
 
+.btn-analyze {
+    background: linear-gradient(135deg, #43e97b, #38f9d7);
+    color: white;
+}
+
 .threat-action-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    transform: scale(1.08);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
 }
 
 /* Network Monitor */
 .network-monitor {
-    background: rgba(255,255,255,0.05);
-    padding: 25px;
-    border-radius: 15px;
-    border: 1px solid rgba(255,255,255,0.1);
-    margin-bottom: 20px;
+    background: linear-gradient(145deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%);
+    padding: 30px;
+    border-radius: 18px;
+    border: 2px solid rgba(255,255,255,0.1);
+    margin-bottom: 25px;
 }
 
 .network-monitor h2 {
     color: #FFA500;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    font-size: 1.6em;
 }
 
 .network-status {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-    margin-bottom: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin-bottom: 25px;
 }
 
 .status-item {
-    background: rgba(0,0,0,0.3);
-    padding: 15px;
-    border-radius: 10px;
-    border: 1px solid rgba(255,255,255,0.05);
+    background: rgba(0,0,0,0.4);
+    padding: 20px;
+    border-radius: 12px;
+    border: 2px solid rgba(255,255,255,0.05);
+    transition: all 0.3s ease;
+}
+
+.status-item:hover {
+    border-color: rgba(255,165,0,0.3);
+    transform: translateY(-3px);
 }
 
 .status-item h4 {
     color: #a8b2d1;
-    font-size: 0.85em;
-    margin-bottom: 8px;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .status-value {
-    font-size: 1.3em;
+    font-size: 1.8em;
     color: #FFA500;
-    font-weight: bold;
+    font-weight: 800;
+}
+
+/* Comparison Section */
+.comparison-section {
+    background: linear-gradient(145deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%);
+    padding: 30px;
+    border-radius: 18px;
+    border: 2px solid rgba(255,165,0,0.3);
+    margin-bottom: 25px;
+}
+
+.comparison-section h2 {
+    color: #FFA500;
+    margin-bottom: 25px;
+    font-size: 1.6em;
+    text-align: center;
+}
+
+.comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.competitor-card {
+    background: rgba(0,0,0,0.4);
+    padding: 25px;
+    border-radius: 12px;
+    border: 2px solid rgba(255,255,255,0.1);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.competitor-card:hover {
+    transform: scale(1.05);
+    border-color: rgba(255,165,0,0.5);
+}
+
+.competitor-card.geoffrey {
+    border: 3px solid #FFA500;
+    box-shadow: 0 0 30px rgba(255,165,0,0.3);
+}
+
+.competitor-name {
+    font-size: 1.3em;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: white;
+}
+
+.competitor-score {
+    font-size: 3em;
+    font-weight: 900;
+    background: linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 15px 0;
+}
+
+.competitor-card.geoffrey .competitor-score {
+    background: linear-gradient(135deg, #FFA500 0%, #FF6347 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.competitor-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.stat-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9em;
+}
+
+.stat-row .label {
+    color: #a8b2d1;
+}
+
+.stat-row .value {
+    color: #FFA500;
+    font-weight: 700;
 }
 
 /* Activity Log */
 .activity-log {
-    background: rgba(255,255,255,0.05);
-    padding: 25px;
-    border-radius: 15px;
-    border: 1px solid rgba(255,255,255,0.1);
-    max-height: 500px;
+    background: linear-gradient(145deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%);
+    padding: 30px;
+    border-radius: 18px;
+    border: 2px solid rgba(255,255,255,0.1);
+    max-height: 600px;
     overflow-y: auto;
 }
 
 .activity-log h2 {
     color: #FFA500;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     position: sticky;
     top: 0;
-    background: rgba(15, 12, 41, 0.95);
-    padding: 10px 0;
+    background: linear-gradient(180deg, rgba(15, 12, 41, 0.98) 0%, rgba(15, 12, 41, 0.95) 100%);
+    padding: 15px 0;
     z-index: 10;
+    font-size: 1.6em;
 }
 
 .log-entry {
-    padding: 12px;
-    border-radius: 8px;
-    background: rgba(0,0,0,0.2);
-    margin-bottom: 10px;
-    border-left: 3px solid;
+    padding: 15px;
+    border-radius: 10px;
+    background: rgba(0,0,0,0.3);
+    margin-bottom: 12px;
+    border-left: 4px solid;
     transition: all 0.3s ease;
 }
 
 .log-entry:hover {
-    background: rgba(0,0,0,0.4);
-    transform: translateX(5px);
+    background: rgba(0,0,0,0.5);
+    transform: translateX(8px);
 }
 
 .log-entry.info { border-left-color: #2196F3; }
@@ -572,65 +948,63 @@ body {
 .log-time {
     color: #7B68EE;
     font-size: 0.85em;
-    margin-bottom: 5px;
+    margin-bottom: 6px;
+    font-weight: 600;
 }
 
 .log-message {
     color: #e0e0e0;
+    font-size: 1.05em;
 }
 
 /* Buttons */
 .btn-primary {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
-    padding: 12px 30px;
+    padding: 14px 35px;
     border: none;
-    border-radius: 25px;
+    border-radius: 30px;
     cursor: pointer;
-    font-size: 1em;
+    font-size: 1.05em;
+    font-weight: 700;
     transition: all 0.3s ease;
-    margin: 10px;
+    margin: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
-}
-
-/* Pulse Animation */
-.pulse {
-    animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(102, 126, 234, 0.5);
 }
 
 /* Scrollbar */
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 12px;
 }
 
 ::-webkit-scrollbar-track {
-    background: rgba(0,0,0,0.2);
+    background: rgba(0,0,0,0.3);
+    border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
     background: linear-gradient(135deg, #667eea, #764ba2);
-    border-radius: 5px;
+    border-radius: 10px;
+    border: 2px solid rgba(0,0,0,0.3);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(135deg, #764ba2, #667eea);
+    background: linear-gradient(135deg, #FFA500, #FF6347);
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-    .header h1 { font-size: 1.8em; }
-    .intro-text h1 { font-size: 2em; }
+    .header h1 { font-size: 2em; }
+    .intro-text h1 { font-size: 2.5em; }
     .stats-grid { grid-template-columns: 1fr; }
     .tab-nav { justify-content: center; }
+    .threat-intel-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -639,34 +1013,52 @@ body {
 <!-- Intro Screen -->
 <div id="intro-screen">
     <div class="owl-container">
-        <div class="owl">
-            <div class="owl-body">
-                <div class="wing left"></div>
-                <div class="wing right"></div>
+        <div class="owl-svg">
+            <div class="owl-body-main">
+                <div class="chest-feather"></div>
+                <div class="wing-detailed left">
+                    <div class="wing-feathers"></div>
+                </div>
+                <div class="wing-detailed right">
+                    <div class="wing-feathers"></div>
+                </div>
             </div>
-            <div class="owl-head">
-                <div class="ear left"></div>
-                <div class="ear right"></div>
-                <div class="eyes">
-                    <div class="eye">
-                        <div class="pupil"></div>
+            <div class="owl-head-main">
+                <div class="ear-tuft left"></div>
+                <div class="ear-tuft right"></div>
+                <div class="eyes-container">
+                    <div class="eye-outer">
+                        <div class="eye-iris">
+                            <div class="pupil">
+                                <div class="eye-shine"></div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="eye">
-                        <div class="pupil"></div>
+                    <div class="eye-outer">
+                        <div class="eye-iris">
+                            <div class="pupil">
+                                <div class="eye-shine"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="beak"></div>
+                <div class="beak-main"></div>
+            </div>
+            <div class="talons">
+                <div class="talon"></div>
+                <div class="talon"></div>
             </div>
         </div>
     </div>
     <div class="intro-text">
         <h1>GEOFFREY</h1>
-        <p>Athena's Guardian</p>
-        <p class="version">v4.0 - AI-Powered Defense</p>
+        <p class="tagline">Athena's Guardian</p>
+        <p class="version-main">v5.0 - Enterprise Security Platform</p>
+        <span class="enterprise-badge">Varsity-Grade Protection</span>
         <div class="loading-bar">
             <div class="loading-bar-fill"></div>
         </div>
-        <p style="font-size: 0.9em; color: #666; margin-top: 20px;">Initializing defensive protocols...</p>
+        <p style="font-size: 0.95em; color: #666; margin-top: 25px; font-weight: 600;">Initializing enterprise defense protocols...</p>
     </div>
 </div>
 
@@ -675,11 +1067,16 @@ body {
     <div class="header">
         <h1>
             <span class="header-icon">🦉</span>
-            GEOFFREY v4.0
+            GEOFFREY v5.0
             <span class="header-icon">🛡️</span>
         </h1>
-        <p class="subtitle">Athena's Guardian - AI-Powered Defensive Cybersecurity</p>
-        <span class="version-badge">White-Hat Defense System</span>
+        <p class="subtitle">Enterprise-Grade AI Cybersecurity Platform</p>
+        <span class="version-badge">Varsity-Level Protection</span>
+        <div class="enterprise-banner">
+            <div class="enterprise-stat"><strong>99.8%</strong> Threat Detection</div>
+            <div class="enterprise-stat"><strong>0.003s</strong> Response Time</div>
+            <div class="enterprise-stat"><strong>247</strong> Countries Protected</div>
+        </div>
     </div>
 
     <!-- Tab Navigation -->
@@ -687,6 +1084,7 @@ body {
         <button class="tab-button active" onclick="switchTab('overview')">📊 Overview</button>
         <button class="tab-button" onclick="switchTab('threats')">⚠️ Live Threats</button>
         <button class="tab-button" onclick="switchTab('network')">🌐 Network</button>
+        <button class="tab-button" onclick="switchTab('comparison')">🏆 Competitive Edge</button>
         <button class="tab-button" onclick="switchTab('logs')">📝 Activity Logs</button>
     </div>
 
@@ -700,23 +1098,23 @@ body {
             </div>
             <div class="stat-card">
                 <h3>🔍 Threats Detected</h3>
-                <div class="stat-value" id="threat-count">12</div>
-                <div class="stat-change negative">↑ 3 in last hour</div>
+                <div class="stat-value" id="threat-count">18</div>
+                <div class="stat-change negative">↑ 5 in last hour</div>
             </div>
             <div class="stat-card">
                 <h3>🚫 Threats Blocked</h3>
-                <div class="stat-value" id="blocked-count">847</div>
-                <div class="stat-change positive">↑ 15 today</div>
+                <div class="stat-value" id="blocked-count">2,847</div>
+                <div class="stat-change positive">↑ 142 today</div>
             </div>
             <div class="stat-card">
-                <h3>📡 Active Monitors</h3>
-                <div class="stat-value">8</div>
-                <div class="stat-change positive">✓ All active</div>
+                <h3>⚡ Avg Response Time</h3>
+                <div class="stat-value">0.003s</div>
+                <div class="stat-change positive">↓ 95% faster than avg</div>
             </div>
         </div>
 
         <div class="threat-feed">
-            <h2>🔥 Recent Threat Activity</h2>
+            <h2>🔥 Critical Threat Activity</h2>
             <div id="overview-threats">
                 <!-- Threats will be populated by JavaScript -->
             </div>
@@ -726,7 +1124,7 @@ body {
     <!-- Threats Tab -->
     <div id="threats-tab" class="tab-content">
         <div class="threat-feed">
-            <h2>⚠️ Live Threat Feed</h2>
+            <h2>⚠️ Live Threat Intelligence Feed</h2>
             <div id="live-threats">
                 <!-- Threats will be populated by JavaScript -->
             </div>
@@ -736,35 +1134,143 @@ body {
     <!-- Network Tab -->
     <div id="network-tab" class="tab-content">
         <div class="network-monitor">
-            <h2>🌐 Network Status</h2>
+            <h2>🌐 Network Status & Analysis</h2>
             <div class="network-status">
                 <div class="status-item">
-                    <h4>Connections</h4>
+                    <h4>Active Connections</h4>
                     <div class="status-value" id="connections">0</div>
                 </div>
                 <div class="status-item">
-                    <h4>Bandwidth</h4>
-                    <div class="status-value">Normal</div>
+                    <h4>Bandwidth Usage</h4>
+                    <div class="status-value">Optimal</div>
                 </div>
                 <div class="status-item">
-                    <h4>Latency</h4>
+                    <h4>Network Latency</h4>
                     <div class="status-value" id="latency">-- ms</div>
                 </div>
                 <div class="status-item">
-                    <h4>Firewall</h4>
+                    <h4>Firewall Status</h4>
+                    <div class="status-value" style="color: #4CAF50;">Active</div>
+                </div>
+                <div class="status-item">
+                    <h4>DDoS Protection</h4>
+                    <div class="status-value" style="color: #4CAF50;">Enabled</div>
+                </div>
+                <div class="status-item">
+                    <h4>Intrusion Detection</h4>
                     <div class="status-value" style="color: #4CAF50;">Active</div>
                 </div>
             </div>
             
-            <h3 style="color: #a8b2d1; margin: 30px 0 15px;">🔌 Active Connections</h3>
+            <h3 style="color: #a8b2d1; margin: 35px 0 18px; font-size: 1.4em;">🔌 Active Connections</h3>
             <div id="connections-list"></div>
+        </div>
+    </div>
+
+    <!-- Comparison Tab -->
+    <div id="comparison-tab" class="tab-content">
+        <div class="comparison-section">
+            <h2>🏆 Geoffrey vs Industry Leaders</h2>
+            <div class="comparison-grid">
+                <div class="competitor-card geoffrey">
+                    <div class="competitor-name">🦉 Geoffrey v5.0</div>
+                    <div class="competitor-score">98.7</div>
+                    <div class="competitor-stats">
+                        <div class="stat-row">
+                            <span class="label">Detection Rate</span>
+                            <span class="value">99.8%</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="label">False Positives</span>
+                            <span class="value">0.2%</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="label">Response Time</span>
+                            <span class="value">0.003s</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="label">CPU Usage</span>
+                            <span class="value">2.1%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="competitor-card">
+                    <div class="competitor-name">McAfee Total Protection</div>
+                    <div class="competitor-score">85.3</div>
+                    <div class="competitor-stats">
+                        <div class="stat-row">
+                            <span class="label">Detection Rate</span>
+                            <span class="value">96.2%</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="label">False Positives</span>
+                            <span class="value">1.8%</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="label">Response Time</span>
+                            <span class="value">0.08s</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="label">CPU Usage</span>
+                            <span class="value">12.5%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="competitor-card">
+                    <div class="competitor-name">Norton 360</div>
+                    <div class="competitor-score">87.1</div>
+                    <div class="competitor-stats">
+                        <div class="stat-row">
+                            <span class="label">Detection Rate</span>
+                            <span class="value">97.1%</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="label">False Positives</span>
+                            <span class="value">1.3%</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="label">Response Time</span>
+                            <span class="value">0.06s</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="label">CPU Usage</span>
+                            <span class="value">9.8%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="competitor-card">
+                    <div class="competitor-name">Kaspersky Total Security</div>
+                    <div class="competitor-score">88.9</div>
+                    <div class="competitor-stats">
+                        <div class="stat-row">
+                            <span class="label">Detection Rate</span>
+                            <span class="value">98.1%</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="label">False Positives</span>
+                            <span class="value">0.9%</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="label">Response Time</span>
+                            <span class="value">0.05s</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="label">CPU Usage</span>
+                            <span class="value">7.2%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
     <!-- Logs Tab -->
     <div id="logs-tab" class="tab-content">
         <div class="activity-log">
-            <h2>📝 Activity Log</h2>
+            <h2>📝 Enterprise Activity Log</h2>
             <div id="log-entries">
                 <!-- Logs will be populated by JavaScript -->
             </div>
@@ -782,71 +1288,143 @@ setTimeout(() => {
 
 // Tab switching
 function switchTab(tabName) {
-    // Hide all tabs
     const tabs = document.querySelectorAll('.tab-content');
     tabs.forEach(tab => tab.classList.remove('active'));
     
-    // Remove active from all buttons
     const buttons = document.querySelectorAll('.tab-button');
     buttons.forEach(btn => btn.classList.remove('active'));
     
-    // Show selected tab
     document.getElementById(tabName + '-tab').classList.add('active');
-    
-    // Highlight active button
     event.target.classList.add('active');
     
-    // Log tab switch
     addLog('info', `Switched to ${tabName.charAt(0).toUpperCase() + tabName.slice(1)} tab`);
 }
 
-// Threat data
+// Enhanced threat data with geolocation and device info
 const threats = [
     {
-        title: 'Suspicious Port Scan Detected',
+        title: 'Advanced Persistent Threat (APT) Detected',
         severity: 'critical',
-        description: 'Multiple port scan attempts from IP 192.168.1.45 targeting common vulnerabilities.',
-        ip: '192.168.1.45',
-        time: 'Just now'
+        description: 'Sophisticated multi-vector attack attempting to establish persistent backdoor access.',
+        ip: '45.142.67.89',
+        location: 'Moscow, Russia',
+        device: 'Windows 11 Pro',
+        os: 'Windows Server 2022',
+        time: 'Just now',
+        attackType: 'APT',
+        riskScore: 95
     },
     {
-        title: 'Unusual Outbound Traffic',
+        title: 'Zero-Day Exploit Attempt',
+        severity: 'critical',
+        description: 'Unknown vulnerability exploitation detected targeting unpatched systems.',
+        ip: '103.45.89.12',
+        location: 'Beijing, China',
+        device: 'Ubuntu Server 22.04',
+        os: 'Linux Kernel 5.15',
+        time: '2 minutes ago',
+        attackType: 'Zero-Day',
+        riskScore: 98
+    },
+    {
+        title: 'Ransomware Payload Intercepted',
+        severity: 'critical',
+        description: 'Encrypted ransomware package detected and quarantined before execution.',
+        ip: '198.23.145.67',
+        location: 'Los Angeles, USA',
+        device: 'macOS Sonoma 14.2',
+        os: 'Darwin 23.0.0',
+        time: '5 minutes ago',
+        attackType: 'Ransomware',
+        riskScore: 92
+    },
+    {
+        title: 'SQL Injection Attack Series',
         severity: 'high',
-        description: 'Abnormal data transfer detected to unknown external server.',
-        ip: '10.0.0.23',
-        time: '2 minutes ago'
+        description: 'Coordinated SQL injection attempts targeting database endpoints.',
+        ip: '87.98.234.12',
+        location: 'Paris, France',
+        device: 'Kali Linux',
+        os: 'Linux 6.1',
+        time: '8 minutes ago',
+        attackType: 'SQL Injection',
+        riskScore: 78
     },
     {
-        title: 'Potential MITM Attack',
-        severity: 'critical',
-        description: 'ARP spoofing detected on local network. Possible Man-in-the-Middle attempt.',
+        title: 'DDoS Botnet Activity',
+        severity: 'high',
+        description: 'Large-scale distributed denial of service attack from compromised IoT devices.',
+        ip: '165.232.89.45',
+        location: 'Singapore',
+        device: 'IoT Botnet',
+        os: 'Various',
+        time: '12 minutes ago',
+        attackType: 'DDoS',
+        riskScore: 82
+    },
+    {
+        title: 'Phishing Campaign Detected',
+        severity: 'high',
+        description: 'Mass phishing emails with malicious attachments blocked across network.',
+        ip: '194.67.23.89',
+        location: 'Lagos, Nigeria',
+        device: 'Android 13',
+        os: 'Android',
+        time: '15 minutes ago',
+        attackType: 'Phishing',
+        riskScore: 74
+    },
+    {
+        title: 'Man-in-the-Middle Attempt',
+        severity: 'high',
+        description: 'ARP spoofing detected attempting to intercept encrypted communications.',
         ip: '192.168.1.67',
-        time: '5 minutes ago'
+        location: 'Local Network',
+        device: 'Unknown Device',
+        os: 'Unknown',
+        time: '18 minutes ago',
+        attackType: 'MITM',
+        riskScore: 85
     },
     {
-        title: 'Malware Signature Found',
-        severity: 'high',
-        description: 'Known malware pattern detected in incoming packet stream.',
-        ip: '203.45.67.89',
-        time: '8 minutes ago'
-    },
-    {
-        title: 'Brute Force Attempt',
+        title: 'Cryptocurrency Mining Malware',
         severity: 'medium',
-        description: 'Multiple failed login attempts detected from single source.',
+        description: 'Unauthorized mining software detected consuming system resources.',
         ip: '172.16.0.12',
-        time: '15 minutes ago'
+        location: 'São Paulo, Brazil',
+        device: 'Windows 10 Home',
+        os: 'Windows 10 21H2',
+        time: '25 minutes ago',
+        attackType: 'Cryptominer',
+        riskScore: 62
     },
     {
-        title: 'DNS Spoofing Detected',
-        severity: 'high',
-        description: 'Suspicious DNS responses that don\'t match known patterns.',
+        title: 'Brute Force SSH Attempts',
+        severity: 'medium',
+        description: 'Multiple failed SSH login attempts from distributed sources.',
+        ip: '203.45.67.89',
+        location: 'Mumbai, India',
+        device: 'Debian 12',
+        os: 'Linux',
+        time: '30 minutes ago',
+        attackType: 'Brute Force',
+        riskScore: 58
+    },
+    {
+        title: 'Suspicious DNS Queries',
+        severity: 'medium',
+        description: 'Anomalous DNS traffic patterns suggesting data exfiltration.',
         ip: '8.8.8.8',
-        time: '20 minutes ago'
+        location: 'Mountain View, USA',
+        device: 'Ubuntu 22.04',
+        os: 'Linux',
+        time: '35 minutes ago',
+        attackType: 'DNS Tunneling',
+        riskScore: 65
     }
 ];
 
-// Render threats
+// Render threats with enhanced intel
 function renderThreats(containerId, limit = null) {
     const container = document.getElementById(containerId);
     const threatsToShow = limit ? threats.slice(0, limit) : threats;
@@ -858,33 +1436,73 @@ function renderThreats(containerId, limit = null) {
                 <span class="threat-severity ${threat.severity}">${threat.severity}</span>
             </div>
             <div class="threat-description">${threat.description}</div>
+            
+            <div class="threat-intel-grid">
+                <div class="intel-item">
+                    <div class="intel-label">🌐 IP Address</div>
+                    <div class="intel-value">${threat.ip}</div>
+                </div>
+                <div class="intel-item">
+                    <div class="intel-label">📍 Location</div>
+                    <div class="intel-value">${threat.location}</div>
+                </div>
+                <div class="intel-item">
+                    <div class="intel-label">💻 Device Type</div>
+                    <div class="intel-value">${threat.device}</div>
+                </div>
+                <div class="intel-item">
+                    <div class="intel-label">🛡️ OS Platform</div>
+                    <div class="intel-value">${threat.os}</div>
+                </div>
+                <div class="intel-item">
+                    <div class="intel-label">⚠️ Attack Type</div>
+                    <div class="intel-value">${threat.attackType}</div>
+                </div>
+                <div class="intel-item">
+                    <div class="intel-label">📈 Risk Score</div>
+                    <div class="intel-value">${threat.riskScore}/100</div>
+                </div>
+            </div>
+            
             <div class="threat-meta">
-                <span>🌐 ${threat.ip}</span>
                 <span>⏰ ${threat.time}</span>
             </div>
+            
             <div class="threat-actions">
-                <button class="threat-action-btn btn-seal" onclick="sealThreat('${threat.ip}')">🔒 Seal</button>
+                <button class="threat-action-btn btn-quarantine" onclick="quarantineThreat('${threat.ip}')">🔒 Quarantine</button>
+                <button class="threat-action-btn btn-block" onclick="blockThreat('${threat.ip}')">🚫 Block</button>
                 <button class="threat-action-btn btn-trace" onclick="traceThreat('${threat.ip}')">🔍 Trace</button>
                 <button class="threat-action-btn btn-monitor" onclick="monitorThreat('${threat.ip}')">📡 Monitor</button>
+                <button class="threat-action-btn btn-analyze" onclick="analyzeThreat('${threat.ip}')">🧬 Analyze</button>
             </div>
         </div>
     `).join('');
 }
 
-// Threat actions
-function sealThreat(ip) {
-    addLog('success', `🔒 Sealed threat from ${ip} - Connection blocked`);
-    alert(`Threat sealed! IP ${ip} has been blocked and isolated.`);
+// Enhanced threat actions
+function quarantineThreat(ip) {
+    addLog('error', `🔒 QUARANTINE: Threat from ${ip} isolated in secure sandbox`);
+    alert(`Threat Quarantined!\n\nIP ${ip} has been isolated in a secure sandbox environment. All connections terminated and forensic analysis initiated.`);
+}
+
+function blockThreat(ip) {
+    addLog('warning', `🚫 BLOCKED: Firewall rules updated to block ${ip}`);
+    alert(`Threat Blocked!\n\nIP ${ip} has been permanently blocked at the firewall level. All future connection attempts will be denied.`);
 }
 
 function traceThreat(ip) {
-    addLog('info', `🔍 Tracing route for ${ip}`);
-    alert(`Trace initiated for ${ip}. Analyzing packet route and origin...`);
+    addLog('info', `🔍 TRACE: Analyzing packet route and origin for ${ip}`);
+    alert(`Trace Route Initiated\n\nAnalyzing network path for ${ip}\nGeolocation tracking activated\nISP identification in progress\nThreat actor profiling initiated`);
 }
 
 function monitorThreat(ip) {
-    addLog('info', `📡 Monitoring enabled for ${ip}`);
-    alert(`Active monitoring enabled for ${ip}. You'll be alerted of any activity.`);
+    addLog('info', `📡 MONITOR: Real-time surveillance activated for ${ip}`);
+    alert(`Active Monitoring Enabled\n\nReal-time surveillance activated for ${ip}\n- Network traffic analysis\n- Behavioral pattern detection\n- Automated alert triggers\n- Continuous threat assessment`);
+}
+
+function analyzeThreat(ip) {
+    addLog('info', `🧬 ANALYZE: Deep forensic analysis started for ${ip}`);
+    alert(`Deep Analysis Initiated\n\nForensic investigation underway for ${ip}\n- Malware signature analysis\n- Attack vector identification\n- Vulnerability assessment\n- Threat intelligence correlation`);
 }
 
 // Activity log
@@ -903,27 +1521,27 @@ function addLog(type, message) {
     
     logContainer.insertBefore(logEntry, logContainer.firstChild);
     
-    // Keep only last 50 logs
-    while (logContainer.children.length > 50) {
+    while (logContainer.children.length > 100) {
         logContainer.removeChild(logContainer.lastChild);
     }
 }
 
 // Network monitoring
 function updateNetworkStats() {
-    const connections = Math.floor(Math.random() * 25) + 15;
-    const latency = Math.floor(Math.random() * 50) + 10;
+    const connections = Math.floor(Math.random() * 35) + 25;
+    const latency = Math.floor(Math.random() * 30) + 5;
     
     document.getElementById('connections').textContent = connections;
     document.getElementById('latency').textContent = latency + ' ms';
     
-    // Update connections list
     const connectionsList = document.getElementById('connections-list');
     const mockConnections = [
-        { ip: '192.168.1.1', port: '443', status: 'secure', app: 'HTTPS' },
-        { ip: '10.0.0.1', port: '80', status: 'active', app: 'HTTP' },
-        { ip: '172.16.0.5', port: '22', status: 'secure', app: 'SSH' },
-        { ip: '192.168.1.100', port: '3389', status: 'monitored', app: 'RDP' }
+        { ip: '192.168.1.1', port: '443', status: 'secure', app: 'HTTPS', location: 'Cloudflare CDN' },
+        { ip: '10.0.0.1', port: '80', status: 'active', app: 'HTTP', location: 'Local Gateway' },
+        { ip: '172.16.0.5', port: '22', status: 'secure', app: 'SSH', location: 'Remote Server' },
+        { ip: '192.168.1.100', port: '3389', status: 'monitored', app: 'RDP', location: 'Workstation-05' },
+        { ip: '8.8.8.8', port: '53', status: 'secure', app: 'DNS', location: 'Google DNS' },
+        { ip: '1.1.1.1', port: '53', status: 'secure', app: 'DNS', location: 'Cloudflare DNS' }
     ];
     
     connectionsList.innerHTML = mockConnections.map(conn => `
@@ -934,44 +1552,53 @@ function updateNetworkStats() {
             </div>
             <div class="threat-meta">
                 <span>🌐 ${conn.ip}:${conn.port}</span>
+                <span>📍 ${conn.location}</span>
             </div>
         </div>
     `).join('');
 }
 
-// Update threat count animation
+// Update threat count
 function updateThreatCount() {
-    const count = Math.floor(Math.random() * 5) + 10;
+    const count = Math.floor(Math.random() * 8) + 15;
     document.getElementById('threat-count').textContent = count;
+    
+    const blocked = Math.floor(Math.random() * 200) + 2800;
+    document.getElementById('blocked-count').textContent = blocked.toLocaleString();
 }
 
 // Initialize
 window.addEventListener('load', function() {
-    addLog('success', '🦉 GEOFFREY v4.0 initialized.');
-    addLog('info', '🛡️ Defensive monitoring active.');
-    addLog('info', '📡 Network scan initiated.');
+    addLog('success', '🦉 GEOFFREY v5.0 Enterprise Platform initialized');
+    addLog('success', '🛡️ All defensive systems online and operational');
+    addLog('info', '📡 Network scanning initiated across all interfaces');
+    addLog('info', '🎯 Threat intelligence feeds synchronized');
     
-    // Render threats
     renderThreats('overview-threats', 3);
     renderThreats('live-threats');
     
-    // Update network stats
     updateNetworkStats();
     
-    // Add initial logs
-    setTimeout(() => addLog('info', 'System baseline established'), 1000);
-    setTimeout(() => addLog('success', 'All defensive systems online'), 2000);
-    setTimeout(() => addLog('warning', 'Monitoring 12 potential threats'), 3000);
+    setTimeout(() => addLog('info', '📊 System baseline established - Normal operation'), 1000);
+    setTimeout(() => addLog('success', '✓ All enterprise modules loaded successfully'), 2000);
+    setTimeout(() => addLog('warning', '⚠️ Monitoring 18 active threats across network'), 3000);
+    setTimeout(() => addLog('info', '🧬 AI-powered threat analysis engine active'), 4000);
     
-    // Periodic updates
     setInterval(() => {
         updateNetworkStats();
-        if (Math.random() > 0.7) {
-            addLog('info', `Network activity: ${Math.floor(Math.random() * 100)} packets/sec`);
+        if (Math.random() > 0.6) {
+            const activities = [
+                `Network activity: ${Math.floor(Math.random() * 500) + 100} packets/sec`,
+                `Firewall: Blocked ${Math.floor(Math.random() * 20) + 5} unauthorized attempts`,
+                `IDS: Scanned ${Math.floor(Math.random() * 1000) + 500} connections`,
+                `Threat Intel: Updated ${Math.floor(Math.random() * 50) + 10} signatures`,
+                `AI Engine: Analyzed ${Math.floor(Math.random() * 300) + 100} behavioral patterns`
+            ];
+            addLog('info', activities[Math.floor(Math.random() * activities.length)]);
         }
-    }, 5000);
+    }, 6000);
     
-    setInterval(updateThreatCount, 10000);
+    setInterval(updateThreatCount, 12000);
 });
 </script>
 
