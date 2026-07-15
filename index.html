@@ -3,448 +3,975 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Geoffrey v3.0 - Defensive Cybersecurity Dashboard with Network Monitoring">
+<meta name="description" content="Geoffrey v4.0 - AI-Powered Defensive Cybersecurity Dashboard">
 <meta name="author" content="IAMHGW">
-<title>GEOFFREY v3.0 - Athena's Guardian</title>
+<title>GEOFFREY v4.0 - Athena's Guardian</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
+
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
-  color: #e0e0e0;
-  min-height: 100vh;
-  padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+    color: #e0e0e0;
+    min-height: 100vh;
+    overflow-x: hidden;
 }
+
+/* Intro Screen */
+#intro-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, #1a1a2e 0%, #0f0f1e 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 1s ease-out;
+}
+
+#intro-screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.owl-container {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+.owl {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.owl-body {
+    width: 140px;
+    height: 160px;
+    background: linear-gradient(145deg, #8B7355 0%, #654321 100%);
+    border-radius: 50% 50% 40% 40%;
+    position: absolute;
+    top: 40px;
+    left: 30px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+}
+
+.owl-head {
+    width: 120px;
+    height: 100px;
+    background: linear-gradient(145deg, #A0826D 0%, #8B7355 100%);
+    border-radius: 50% 50% 45% 45%;
+    position: absolute;
+    top: 10px;
+    left: 40px;
+}
+
+.ear {
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 35px solid #8B7355;
+    position: absolute;
+    top: -5px;
+}
+
+.ear.left { left: 15px; transform: rotate(-10deg); }
+.ear.right { right: 15px; transform: rotate(10deg); }
+
+.eyes {
+    display: flex;
+    gap: 20px;
+    position: absolute;
+    top: 35px;
+    left: 25px;
+}
+
+.eye {
+    width: 30px;
+    height: 35px;
+    background: white;
+    border-radius: 50%;
+    position: relative;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
+    animation: blink 4s infinite;
+}
+
+@keyframes blink {
+    0%, 48%, 52%, 100% { height: 35px; }
+    50% { height: 3px; }
+}
+
+.pupil {
+    width: 12px;
+    height: 15px;
+    background: #2c3e50;
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+    left: 9px;
+    animation: lookAround 6s infinite;
+}
+
+@keyframes lookAround {
+    0%, 100% { transform: translate(0, 0); }
+    25% { transform: translate(3px, -2px); }
+    50% { transform: translate(-3px, 0); }
+    75% { transform: translate(0, 2px); }
+}
+
+.beak {
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 15px solid #FFA500;
+    position: absolute;
+    top: 60px;
+    left: 52px;
+}
+
+.wing {
+    width: 50px;
+    height: 70px;
+    background: #654321;
+    border-radius: 0 50% 50% 0;
+    position: absolute;
+    top: 80px;
+}
+
+.wing.left {
+    left: -15px;
+    transform: rotate(-20deg);
+    animation: flapLeft 2s ease-in-out infinite;
+}
+
+.wing.right {
+    right: -15px;
+    transform: rotate(20deg) scaleX(-1);
+    animation: flapRight 2s ease-in-out infinite;
+}
+
+@keyframes flapLeft {
+    0%, 100% { transform: rotate(-20deg); }
+    50% { transform: rotate(-35deg); }
+}
+
+@keyframes flapRight {
+    0%, 100% { transform: rotate(20deg) scaleX(-1); }
+    50% { transform: rotate(35deg) scaleX(-1); }
+}
+
+.intro-text {
+    margin-top: 40px;
+    text-align: center;
+    animation: fadeInUp 1s ease-out 0.5s both;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.intro-text h1 {
+    font-size: 3em;
+    color: #FFA500;
+    text-shadow: 0 0 30px rgba(255,165,0,0.6);
+    margin-bottom: 15px;
+    letter-spacing: 3px;
+}
+
+.intro-text p {
+    font-size: 1.2em;
+    color: #a8b2d1;
+    margin-bottom: 10px;
+}
+
+.intro-text .version {
+    color: #7B68EE;
+    font-size: 0.9em;
+    margin-top: 20px;
+}
+
+.loading-bar {
+    width: 300px;
+    height: 4px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+    overflow: hidden;
+    margin: 30px auto;
+}
+
+.loading-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #FFA500, #FF6347);
+    border-radius: 2px;
+    animation: loading 3s ease-out forwards;
+}
+
+@keyframes loading {
+    from { width: 0%; }
+    to { width: 100%; }
+}
+
+/* Main Dashboard */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+    opacity: 0;
+    animation: fadeIn 1s ease-in forwards;
+    animation-delay: 4s;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
 .header {
-  text-align: center;
-  padding: 20px 0;
-  border-bottom: 2px solid rgba(255,165,0,0.3);
-  margin-bottom: 30px;
+    text-align: center;
+    padding: 30px 0;
+    border-bottom: 2px solid rgba(255,165,0,0.3);
+    margin-bottom: 30px;
 }
+
 .header h1 {
-  font-size: 2.5em;
-  color: #FFA500;
-  text-shadow: 0 0 20px rgba(255,165,0,0.5);
+    font-size: 2.5em;
+    color: #FFA500;
+    text-shadow: 0 0 20px rgba(255,165,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
 }
+
+.header-icon {
+    font-size: 0.8em;
+}
+
 .header .subtitle {
-  color: #a8b2d1;
-  margin-top: 10px;
+    color: #a8b2d1;
+    margin-top: 10px;
+    font-size: 1.1em;
 }
-.dashboard {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 20px;
-  max-width: 1400px;
-  margin: 0 auto;
+
+.header .version-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.8em;
+    margin-top: 10px;
 }
-.card {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,165,0,0.2);
-  border-radius: 12px;
-  padding: 20px;
-  backdrop-filter: blur(10px);
-  transition: all 0.3s;
+
+/* Tab Navigation */
+.tab-nav {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    border-bottom: 2px solid rgba(255,255,255,0.1);
+    padding-bottom: 0;
+    flex-wrap: wrap;
 }
-.card:hover {
-  border-color: rgba(255,165,0,0.5);
-  box-shadow: 0 0 20px rgba(255,165,0,0.2);
+
+.tab-button {
+    padding: 12px 30px;
+    background: rgba(255,255,255,0.05);
+    border: none;
+    color: #a8b2d1;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 10px 10px 0 0;
+    font-size: 1em;
+    position: relative;
 }
-.card h2 {
-  color: #FFA500;
-  margin-bottom: 15px;
-  font-size: 1.3em;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+
+.tab-button:hover {
+    background: rgba(255,255,255,0.1);
+    color: #FFA500;
 }
-.status-active { color: #00ff00; }
-.status-warning { color: #FFA500; }
-.status-critical { color: #ff4444; }
-.device-item, .alert-item, .log-item {
-  padding: 10px;
-  margin: 8px 0;
-  background: rgba(0,0,0,0.3);
-  border-left: 3px solid #FFA500;
-  border-radius: 5px;
+
+.tab-button.active {
+    background: linear-gradient(135deg, #FFA500, #FF6347);
+    color: white;
+    box-shadow: 0 -3px 20px rgba(255,165,0,0.4);
 }
-.metric {
-  display: flex;
-  justify-content: space-between;
-  padding: 8px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+
+.tab-content {
+    display: none;
+    animation: slideIn 0.5s ease-out;
 }
-.metric:last-child { border-bottom: none; }
-.metric-label { color: #a8b2d1; }
-.metric-value { color: #fff; font-weight: bold; }
-.btn {
-  background: #FFA500;
-  color: #000;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold;
-  margin: 5px;
-  transition: all 0.3s;
+
+.tab-content.active {
+    display: block;
 }
-.btn:hover {
-  background: #ff8c00;
-  transform: translateY(-2px);
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
-.btn-secondary {
-  background: rgba(255,165,0,0.2);
-  color: #FFA500;
-  border: 1px solid #FFA500;
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
 }
-input, textarea {
-  width: 100%;
-  padding: 10px;
-  margin: 8px 0;
-  background: rgba(0,0,0,0.3);
-  border: 1px solid rgba(255,165,0,0.3);
-  border-radius: 5px;
-  color: #fff;
-  font-family: 'Courier New', monospace;
+
+.stat-card {
+    background: rgba(255,255,255,0.05);
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: all 0.3s ease;
 }
-.footer {
-  text-align: center;
-  margin-top: 40px;
-  padding-top: 20px;
-  border-top: 1px solid rgba(255,255,255,0.1);
-  color: #a8b2d1;
-  font-size: 0.9em;
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    border-color: rgba(255,165,0,0.5);
+}
+
+.stat-card h3 {
+    color: #a8b2d1;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.stat-value {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #FFA500;
+    text-shadow: 0 0 10px rgba(255,165,0,0.3);
+}
+
+.stat-change {
+    font-size: 0.9em;
+    margin-top: 8px;
+}
+
+.stat-change.positive { color: #4CAF50; }
+.stat-change.negative { color: #f44336; }
+
+/* Threat Feed */
+.threat-feed {
+    background: rgba(255,255,255,0.05);
+    padding: 25px;
+    border-radius: 15px;
+    border: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 20px;
+}
+
+.threat-feed h2 {
+    color: #FFA500;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.threat-card {
+    background: rgba(0,0,0,0.3);
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 4px solid;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.threat-card:hover {
+    transform: translateX(10px);
+    background: rgba(0,0,0,0.5);
+}
+
+.threat-card.critical { border-left-color: #f44336; }
+.threat-card.high { border-left-color: #ff9800; }
+.threat-card.medium { border-left-color: #ffeb3b; }
+.threat-card.low { border-left-color: #4CAF50; }
+
+.threat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.threat-title {
+    font-size: 1.1em;
+    color: white;
+    font-weight: bold;
+}
+
+.threat-severity {
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.8em;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.threat-severity.critical { background: #f44336; }
+.threat-severity.high { background: #ff9800; }
+.threat-severity.medium { background: #ffeb3b; color: #333; }
+.threat-severity.low { background: #4CAF50; }
+
+.threat-description {
+    color: #a8b2d1;
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.threat-meta {
+    display: flex;
+    gap: 20px;
+    font-size: 0.85em;
+    color: #7B68EE;
+}
+
+.threat-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.threat-action-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+}
+
+.btn-seal {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+}
+
+.btn-trace {
+    background: linear-gradient(135deg, #f093fb, #f5576c);
+    color: white;
+}
+
+.btn-monitor {
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+    color: white;
+}
+
+.threat-action-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Network Monitor */
+.network-monitor {
+    background: rgba(255,255,255,0.05);
+    padding: 25px;
+    border-radius: 15px;
+    border: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 20px;
+}
+
+.network-monitor h2 {
+    color: #FFA500;
+    margin-bottom: 20px;
+}
+
+.network-status {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.status-item {
+    background: rgba(0,0,0,0.3);
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.status-item h4 {
+    color: #a8b2d1;
+    font-size: 0.85em;
+    margin-bottom: 8px;
+}
+
+.status-value {
+    font-size: 1.3em;
+    color: #FFA500;
+    font-weight: bold;
+}
+
+/* Activity Log */
+.activity-log {
+    background: rgba(255,255,255,0.05);
+    padding: 25px;
+    border-radius: 15px;
+    border: 1px solid rgba(255,255,255,0.1);
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.activity-log h2 {
+    color: #FFA500;
+    margin-bottom: 20px;
+    position: sticky;
+    top: 0;
+    background: rgba(15, 12, 41, 0.95);
+    padding: 10px 0;
+    z-index: 10;
+}
+
+.log-entry {
+    padding: 12px;
+    border-radius: 8px;
+    background: rgba(0,0,0,0.2);
+    margin-bottom: 10px;
+    border-left: 3px solid;
+    transition: all 0.3s ease;
+}
+
+.log-entry:hover {
+    background: rgba(0,0,0,0.4);
+    transform: translateX(5px);
+}
+
+.log-entry.info { border-left-color: #2196F3; }
+.log-entry.success { border-left-color: #4CAF50; }
+.log-entry.warning { border-left-color: #ff9800; }
+.log-entry.error { border-left-color: #f44336; }
+
+.log-time {
+    color: #7B68EE;
+    font-size: 0.85em;
+    margin-bottom: 5px;
+}
+
+.log-message {
+    color: #e0e0e0;
+}
+
+/* Buttons */
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: all 0.3s ease;
+    margin: 10px;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+}
+
+/* Pulse Animation */
+.pulse {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.2);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #764ba2, #667eea);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .header h1 { font-size: 1.8em; }
+    .intro-text h1 { font-size: 2em; }
+    .stats-grid { grid-template-columns: 1fr; }
+    .tab-nav { justify-content: center; }
 }
 </style>
 </head>
 <body>
 
-<div class="header">
-  <h1>🦉 GEOFFREY v3.0</h1>
-  <p class="subtitle">Athena's Guardian | Defensive Cybersecurity Dashboard</p>
-  <p class="subtitle">Status: <span class="status-active" id="systemStatus">● ACTIVE</span></p>
+<!-- Intro Screen -->
+<div id="intro-screen">
+    <div class="owl-container">
+        <div class="owl">
+            <div class="owl-body">
+                <div class="wing left"></div>
+                <div class="wing right"></div>
+            </div>
+            <div class="owl-head">
+                <div class="ear left"></div>
+                <div class="ear right"></div>
+                <div class="eyes">
+                    <div class="eye">
+                        <div class="pupil"></div>
+                    </div>
+                    <div class="eye">
+                        <div class="pupil"></div>
+                    </div>
+                </div>
+                <div class="beak"></div>
+            </div>
+        </div>
+    </div>
+    <div class="intro-text">
+        <h1>GEOFFREY</h1>
+        <p>Athena's Guardian</p>
+        <p class="version">v4.0 - AI-Powered Defense</p>
+        <div class="loading-bar">
+            <div class="loading-bar-fill"></div>
+        </div>
+        <p style="font-size: 0.9em; color: #666; margin-top: 20px;">Initializing defensive protocols...</p>
+    </div>
 </div>
 
-<div class="dashboard">
-  
-  <div class="card">
-    <h2>📡 Network Monitor</h2>
-    <div class="metric">
-      <span class="metric-label">Connected Devices:</span>
-      <span class="metric-value" id="deviceCount">0</span>
+<!-- Main Dashboard -->
+<div class="container">
+    <div class="header">
+        <h1>
+            <span class="header-icon">🦉</span>
+            GEOFFREY v4.0
+            <span class="header-icon">🛡️</span>
+        </h1>
+        <p class="subtitle">Athena's Guardian - AI-Powered Defensive Cybersecurity</p>
+        <span class="version-badge">White-Hat Defense System</span>
     </div>
-    <div class="metric">
-      <span class="metric-label">Total Traffic:</span>
-      <span class="metric-value" id="totalTraffic">0 MB</span>
-    </div>
-    <div class="metric">
-      <span class="metric-label">Active Ports:</span>
-      <span class="metric-value" id="activePorts">0</span>
-    </div>
-    <div id="deviceList" style="margin-top: 15px;"></div>
-    <button class="btn" onclick="scanNetwork()">🔍 Scan Network</button>
-    <button class="btn btn-secondary" onclick="refreshDevices()">🔄 Refresh</button>
-  </div>
-  
-  <div class="card">
-    <h2>🛡️ Threat Detection</h2>
-    <div class="metric">
-      <span class="metric-label">Active Threats:</span>
-      <span class="metric-value status-warning" id="threatCount">0</span>
-    </div>
-    <div class="metric">
-      <span class="metric-label">MITM Detection:</span>
-      <span class="metric-value status-active" id="mitmStatus">● Monitoring</span>
-    </div>
-    <div class="metric">
-      <span class="metric-label">C2 Detection:</span>
-      <span class="metric-value status-active" id="c2Status">● Monitoring</span>
-    </div>
-    <div id="threatAlerts" style="margin-top: 15px;"></div>
-    <button class="btn" onclick="runThreatScan()">🔎 Deep Scan</button>
-  </div>
-  
-  <div class="card">
-    <h2>🌐 IP & Trace Analysis</h2>
-    <input type="text" id="ipInput" placeholder="Enter IP address (e.g., 192.168.1.1)" />
-    <button class="btn" onclick="traceIP()">🔍 Trace IP</button>
-    <button class="btn btn-secondary" onclick="geolocateIP()">📍 Geolocate</button>
-    <div id="ipResults" style="margin-top: 15px;"></div>
-  </div>
-  
-  <div class="card">
-    <h2>📋 Activity Logs</h2>
-    <div id="logDisplay" style="max-height: 300px; overflow-y: auto;"></div>
-    <button class="btn btn-secondary" onclick="clearLogs()">🗑️ Clear Logs</button>
-    <button class="btn btn-secondary" onclick="exportLogs()">💾 Export</button>
-  </div>
-  
-  <div class="card">
-    <h2>👤 User Registration</h2>
-    <input type="text" id="userName" placeholder="Full Name" />
-    <input type="email" id="userEmail" placeholder="Email" />
-    <input type="text" id="userOrg" placeholder="Organization (Optional)" />
-    <textarea id="userPurpose" rows="3" placeholder="Purpose of use (required for audit trail)"></textarea>
-    <button class="btn" onclick="registerUser()">✓ Register & Activate</button>
-    <p style="font-size: 0.8em; color: #a8b2d1; margin-top: 10px;">
-      ⚠️ All downloads are logged for security compliance. Geoffrey is a white-hat defensive tool only.
-    </p>
-  </div>
-  
-</div>
 
-<div class="footer">
-  <p><strong>Created by IAMHGW</strong> • Denver, Colorado • July 15, 2026</p>
-  <p>Geoffrey v3.0 - Defensive White-Hat Cybersecurity Tool</p>
-  <p style="font-size: 0.8em; margin-top: 10px;">Unauthorized distribution or commercial use prohibited</p>
+    <!-- Tab Navigation -->
+    <div class="tab-nav">
+        <button class="tab-button active" onclick="switchTab('overview')">📊 Overview</button>
+        <button class="tab-button" onclick="switchTab('threats')">⚠️ Live Threats</button>
+        <button class="tab-button" onclick="switchTab('network')">🌐 Network</button>
+        <button class="tab-button" onclick="switchTab('logs')">📝 Activity Logs</button>
+    </div>
+
+    <!-- Overview Tab -->
+    <div id="overview-tab" class="tab-content active">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>🛡️ System Status</h3>
+                <div class="stat-value">SECURE</div>
+                <div class="stat-change positive">✓ All systems operational</div>
+            </div>
+            <div class="stat-card">
+                <h3>🔍 Threats Detected</h3>
+                <div class="stat-value" id="threat-count">12</div>
+                <div class="stat-change negative">↑ 3 in last hour</div>
+            </div>
+            <div class="stat-card">
+                <h3>🚫 Threats Blocked</h3>
+                <div class="stat-value" id="blocked-count">847</div>
+                <div class="stat-change positive">↑ 15 today</div>
+            </div>
+            <div class="stat-card">
+                <h3>📡 Active Monitors</h3>
+                <div class="stat-value">8</div>
+                <div class="stat-change positive">✓ All active</div>
+            </div>
+        </div>
+
+        <div class="threat-feed">
+            <h2>🔥 Recent Threat Activity</h2>
+            <div id="overview-threats">
+                <!-- Threats will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Threats Tab -->
+    <div id="threats-tab" class="tab-content">
+        <div class="threat-feed">
+            <h2>⚠️ Live Threat Feed</h2>
+            <div id="live-threats">
+                <!-- Threats will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Network Tab -->
+    <div id="network-tab" class="tab-content">
+        <div class="network-monitor">
+            <h2>🌐 Network Status</h2>
+            <div class="network-status">
+                <div class="status-item">
+                    <h4>Connections</h4>
+                    <div class="status-value" id="connections">0</div>
+                </div>
+                <div class="status-item">
+                    <h4>Bandwidth</h4>
+                    <div class="status-value">Normal</div>
+                </div>
+                <div class="status-item">
+                    <h4>Latency</h4>
+                    <div class="status-value" id="latency">-- ms</div>
+                </div>
+                <div class="status-item">
+                    <h4>Firewall</h4>
+                    <div class="status-value" style="color: #4CAF50;">Active</div>
+                </div>
+            </div>
+            
+            <h3 style="color: #a8b2d1; margin: 30px 0 15px;">🔌 Active Connections</h3>
+            <div id="connections-list"></div>
+        </div>
+    </div>
+
+    <!-- Logs Tab -->
+    <div id="logs-tab" class="tab-content">
+        <div class="activity-log">
+            <h2>📝 Activity Log</h2>
+            <div id="log-entries">
+                <!-- Logs will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
-let devices = [];
-let logs = [];
-let userData = null;
+// Hide intro screen after animation
+setTimeout(() => {
+    const intro = document.getElementById('intro-screen');
+    intro.classList.add('hidden');
+    setTimeout(() => intro.style.display = 'none', 1000);
+}, 4000);
 
-function scanNetwork() {
-  addLog('🔍 Initiating network scan...');
-  const deviceCount = Math.floor(Math.random() * 8) + 3;
-  devices = [];
-  
-  for (let i = 0; i < deviceCount; i++) {
-    const ip = `192.168.1.${100 + i}`;
-    const mac = generateMAC();
-    const traffic = Math.floor(Math.random() * 500) + 50;
-    const ports = generatePorts();
+// Tab switching
+function switchTab(tabName) {
+    // Hide all tabs
+    const tabs = document.querySelectorAll('.tab-content');
+    tabs.forEach(tab => tab.classList.remove('active'));
     
-    devices.push({
-      ip: ip,
-      mac: mac,
-      hostname: `Device-${i + 1}`,
-      traffic: traffic,
-      ports: ports,
-      status: Math.random() > 0.2 ? 'active' : 'suspicious'
-    });
-  }
-  
-  displayDevices();
-  updateNetworkMetrics();
-  addLog(`✓ Network scan complete. Found ${deviceCount} devices.`);
-}
-
-function displayDevices() {
-  const container = document.getElementById('deviceList');
-  container.innerHTML = '<h3 style="color: #FFA500; font-size: 1em; margin: 10px 0;">Connected Devices:</h3>';
-  
-  devices.forEach((device, idx) => {
-    const statusColor = device.status === 'active' ? '#00ff00' : '#FFA500';
-    const div = document.createElement('div');
-    div.className = 'device-item';
-    div.innerHTML = `
-      <strong style="color: ${statusColor};">● ${device.hostname}</strong><br>
-      IP: ${device.ip} | MAC: ${device.mac}<br>
-      Traffic: ${device.traffic} MB | Ports: ${device.ports.join(', ')}
-    `;
-    container.appendChild(div);
-  });
-}
-
-function updateNetworkMetrics() {
-  document.getElementById('deviceCount').textContent = devices.length;
-  const totalTraffic = devices.reduce((sum, d) => sum + d.traffic, 0);
-  document.getElementById('totalTraffic').textContent = totalTraffic + ' MB';
-  
-  const allPorts = new Set();
-  devices.forEach(d => d.ports.forEach(p => allPorts.add(p)));
-  document.getElementById('activePorts').textContent = allPorts.size;
-}
-
-function refreshDevices() {
-  addLog('🔄 Refreshing device list...');
-  scanNetwork();
-}
-
-function runThreatScan() {
-  addLog('🛡️ Running deep threat scan...');
-  document.getElementById('threatCount').textContent = '...';
-  
-  setTimeout(() => {
-    const threats = Math.floor(Math.random() * 3);
-    document.getElementById('threatCount').textContent = threats;
+    // Remove active from all buttons
+    const buttons = document.querySelectorAll('.tab-button');
+    buttons.forEach(btn => btn.classList.remove('active'));
     
-    const alertContainer = document.getElementById('threatAlerts');
-    alertContainer.innerHTML = '';
+    // Show selected tab
+    document.getElementById(tabName + '-tab').classList.add('active');
     
-    if (threats > 0) {
-      for (let i = 0; i < threats; i++) {
-        const types = ['Suspicious Port Scan', 'Unusual Traffic Pattern', 'Potential MITM', 'Unknown Device'];
-        const type = types[Math.floor(Math.random() * types.length)];
-        const ip = `192.168.1.${Math.floor(Math.random() * 255)}`;
-        
-        const alert = document.createElement('div');
-        alert.className = 'alert-item';
-        alert.style.borderLeftColor = '#ff4444';
-        alert.innerHTML = `
-          <strong style="color: #ff4444;">⚠️ ${type}</strong><br>
-          Source IP: ${ip}<br>
-          Time: ${new Date().toLocaleTimeString()}
-        `;
-        alertContainer.appendChild(alert);
-      }
-      addLog(`⚠️ Threat scan complete: ${threats} potential threat(s) detected.`);
-    } else {
-      alertContainer.innerHTML = '<p style="color: #00ff00;">✓ No threats detected. Network is secure.</p>';
-      addLog('✓ Threat scan complete: No threats detected.');
+    // Highlight active button
+    event.target.classList.add('active');
+    
+    // Log tab switch
+    addLog('info', `Switched to ${tabName.charAt(0).toUpperCase() + tabName.slice(1)} tab`);
+}
+
+// Threat data
+const threats = [
+    {
+        title: 'Suspicious Port Scan Detected',
+        severity: 'critical',
+        description: 'Multiple port scan attempts from IP 192.168.1.45 targeting common vulnerabilities.',
+        ip: '192.168.1.45',
+        time: 'Just now'
+    },
+    {
+        title: 'Unusual Outbound Traffic',
+        severity: 'high',
+        description: 'Abnormal data transfer detected to unknown external server.',
+        ip: '10.0.0.23',
+        time: '2 minutes ago'
+    },
+    {
+        title: 'Potential MITM Attack',
+        severity: 'critical',
+        description: 'ARP spoofing detected on local network. Possible Man-in-the-Middle attempt.',
+        ip: '192.168.1.67',
+        time: '5 minutes ago'
+    },
+    {
+        title: 'Malware Signature Found',
+        severity: 'high',
+        description: 'Known malware pattern detected in incoming packet stream.',
+        ip: '203.45.67.89',
+        time: '8 minutes ago'
+    },
+    {
+        title: 'Brute Force Attempt',
+        severity: 'medium',
+        description: 'Multiple failed login attempts detected from single source.',
+        ip: '172.16.0.12',
+        time: '15 minutes ago'
+    },
+    {
+        title: 'DNS Spoofing Detected',
+        severity: 'high',
+        description: 'Suspicious DNS responses that don\'t match known patterns.',
+        ip: '8.8.8.8',
+        time: '20 minutes ago'
     }
-  }, 2000);
-}
+];
 
-function traceIP() {
-  const ip = document.getElementById('ipInput').value;
-  if (!ip) {
-    alert('Please enter an IP address');
-    return;
-  }
-  
-  addLog(`🌐 Tracing IP: ${ip}...`);
-  const results = document.getElementById('ipResults');
-  results.innerHTML = '<p style="color: #FFA500;">⏳ Analyzing IP address...</p>';
-  
-  setTimeout(() => {
-    const hops = Math.floor(Math.random() * 10) + 5;
-    const latency = Math.floor(Math.random() * 100) + 20;
-    const isp = ['Comcast', 'AT&T', 'Verizon', 'CenturyLink', 'Cox'][Math.floor(Math.random() * 5)];
-    const org = ['Residential', 'Business', 'Data Center', 'Educational'][Math.floor(Math.random() * 4)];
+// Render threats
+function renderThreats(containerId, limit = null) {
+    const container = document.getElementById(containerId);
+    const threatsToShow = limit ? threats.slice(0, limit) : threats;
     
-    results.innerHTML = `
-      <div class="metric"><span class="metric-label">IP Address:</span><span class="metric-value">${ip}</span></div>
-      <div class="metric"><span class="metric-label">Hostname:</span><span class="metric-value">${generateHostname()}</span></div>
-      <div class="metric"><span class="metric-label">ISP:</span><span class="metric-value">${isp}</span></div>
-      <div class="metric"><span class="metric-label">Organization:</span><span class="metric-value">${org}</span></div>
-      <div class="metric"><span class="metric-label">Hops:</span><span class="metric-value">${hops}</span></div>
-      <div class="metric"><span class="metric-label">Latency:</span><span class="metric-value">${latency}ms</span></div>
-      <div class="metric"><span class="metric-label">Open Ports:</span><span class="metric-value">${generatePorts().join(', ')}</span></div>
-    `;
-    addLog(`✓ IP trace complete for ${ip}`);
-  }, 1500);
+    container.innerHTML = threatsToShow.map(threat => `
+        <div class="threat-card ${threat.severity}">
+            <div class="threat-header">
+                <div class="threat-title">${threat.title}</div>
+                <span class="threat-severity ${threat.severity}">${threat.severity}</span>
+            </div>
+            <div class="threat-description">${threat.description}</div>
+            <div class="threat-meta">
+                <span>🌐 ${threat.ip}</span>
+                <span>⏰ ${threat.time}</span>
+            </div>
+            <div class="threat-actions">
+                <button class="threat-action-btn btn-seal" onclick="sealThreat('${threat.ip}')">🔒 Seal</button>
+                <button class="threat-action-btn btn-trace" onclick="traceThreat('${threat.ip}')">🔍 Trace</button>
+                <button class="threat-action-btn btn-monitor" onclick="monitorThreat('${threat.ip}')">📡 Monitor</button>
+            </div>
+        </div>
+    `).join('');
 }
 
-function geolocateIP() {
-  const ip = document.getElementById('ipInput').value;
-  if (!ip) {
-    alert('Please enter an IP address');
-    return;
-  }
-  
-  addLog(`📍 Geolocating IP: ${ip}...`);
-  const results = document.getElementById('ipResults');
-  results.innerHTML = '<p style="color: #FFA500;">⏳ Fetching geolocation data...</p>';
-  
-  setTimeout(() => {
-    const cities = ['Denver, CO', 'San Francisco, CA', 'New York, NY', 'Austin, TX', 'Seattle, WA', 'Chicago, IL'];
-    const city = cities[Math.floor(Math.random() * cities.length)];
-    const lat = (Math.random() * 60 + 20).toFixed(4);
-    const lon = (Math.random() * -120 - 70).toFixed(4);
+// Threat actions
+function sealThreat(ip) {
+    addLog('success', `🔒 Sealed threat from ${ip} - Connection blocked`);
+    alert(`Threat sealed! IP ${ip} has been blocked and isolated.`);
+}
+
+function traceThreat(ip) {
+    addLog('info', `🔍 Tracing route for ${ip}`);
+    alert(`Trace initiated for ${ip}. Analyzing packet route and origin...`);
+}
+
+function monitorThreat(ip) {
+    addLog('info', `📡 Monitoring enabled for ${ip}`);
+    alert(`Active monitoring enabled for ${ip}. You'll be alerted of any activity.`);
+}
+
+// Activity log
+let logCounter = 0;
+function addLog(type, message) {
+    const logContainer = document.getElementById('log-entries');
+    const time = new Date().toLocaleTimeString();
+    logCounter++;
     
-    results.innerHTML = `
-      <div class="metric"><span class="metric-label">IP Address:</span><span class="metric-value">${ip}</span></div>
-      <div class="metric"><span class="metric-label">Location:</span><span class="metric-value">${city}</span></div>
-      <div class="metric"><span class="metric-label">Coordinates:</span><span class="metric-value">${lat}, ${lon}</span></div>
-      <div class="metric"><span class="metric-label">Timezone:</span><span class="metric-value">America/Denver (MDT)</span></div>
-      <div class="metric"><span class="metric-label">Country:</span><span class="metric-value">United States</span></div>
+    const logEntry = document.createElement('div');
+    logEntry.className = `log-entry ${type}`;
+    logEntry.innerHTML = `
+        <div class="log-time">${time}</div>
+        <div class="log-message">${message}</div>
     `;
-    addLog(`✓ Geolocation complete for ${ip}: ${city}`);
-  }, 1500);
+    
+    logContainer.insertBefore(logEntry, logContainer.firstChild);
+    
+    // Keep only last 50 logs
+    while (logContainer.children.length > 50) {
+        logContainer.removeChild(logContainer.lastChild);
+    }
 }
 
-function addLog(message) {
-  const timestamp = new Date().toLocaleTimeString();
-  logs.push({ time: timestamp, message: message });
-  
-  const logDisplay = document.getElementById('logDisplay');
-  const logItem = document.createElement('div');
-  logItem.className = 'log-item';
-  logItem.innerHTML = `<strong>[${timestamp}]</strong> ${message}`;
-  logDisplay.insertBefore(logItem, logDisplay.firstChild);
-  
-  if (logs.length > 50) {
-    logs.shift();
-    logDisplay.removeChild(logDisplay.lastChild);
-  }
+// Network monitoring
+function updateNetworkStats() {
+    const connections = Math.floor(Math.random() * 25) + 15;
+    const latency = Math.floor(Math.random() * 50) + 10;
+    
+    document.getElementById('connections').textContent = connections;
+    document.getElementById('latency').textContent = latency + ' ms';
+    
+    // Update connections list
+    const connectionsList = document.getElementById('connections-list');
+    const mockConnections = [
+        { ip: '192.168.1.1', port: '443', status: 'secure', app: 'HTTPS' },
+        { ip: '10.0.0.1', port: '80', status: 'active', app: 'HTTP' },
+        { ip: '172.16.0.5', port: '22', status: 'secure', app: 'SSH' },
+        { ip: '192.168.1.100', port: '3389', status: 'monitored', app: 'RDP' }
+    ];
+    
+    connectionsList.innerHTML = mockConnections.map(conn => `
+        <div class="threat-card low">
+            <div class="threat-header">
+                <div class="threat-title">🔗 ${conn.app} Connection</div>
+                <span class="threat-severity low">${conn.status}</span>
+            </div>
+            <div class="threat-meta">
+                <span>🌐 ${conn.ip}:${conn.port}</span>
+            </div>
+        </div>
+    `).join('');
 }
 
-function clearLogs() {
-  logs = [];
-  document.getElementById('logDisplay').innerHTML = '';
-  addLog('🗑️ Logs cleared.');
+// Update threat count animation
+function updateThreatCount() {
+    const count = Math.floor(Math.random() * 5) + 10;
+    document.getElementById('threat-count').textContent = count;
 }
 
-function exportLogs() {
-  const logText = logs.map(l => `[${l.time}] ${l.message}`).join('\n');
-  const blob = new Blob([logText], { type: 'text/plain' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `geoffrey-logs-${Date.now()}.txt`;
-  a.click();
-  addLog('💾 Logs exported successfully.');
-}
-
-function registerUser() {
-  const name = document.getElementById('userName').value;
-  const email = document.getElementById('userEmail').value;
-  const org = document.getElementById('userOrg').value;
-  const purpose = document.getElementById('userPurpose').value;
-  
-  if (!name || !email || !purpose) {
-    alert('Please fill in all required fields (Name, Email, and Purpose).');
-    return;
-  }
-  
-  userData = {
-    name: name,
-    email: email,
-    organization: org || 'Independent',
-    purpose: purpose,
-    registeredAt: new Date().toISOString()
-  };
-  
-  localStorage.setItem('geoffrey_user', JSON.stringify(userData));
-  addLog(`✓ User registered: ${name} (${email})`);
-  alert('Registration successful! Geoffrey is now fully activated.');
-}
-
-function generateMAC() {
-  return Array.from({length: 6}, () => 
-    Math.floor(Math.random() * 256).toString(16).padStart(2, '0')
-  ).join(':').toUpperCase();
-}
-
-function generatePorts() {
-  const commonPorts = [80, 443, 22, 21, 25, 53, 3389, 8080, 3306, 5432];
-  const numPorts = Math.floor(Math.random() * 4) + 2;
-  const selected = [];
-  for (let i = 0; i < numPorts; i++) {
-    selected.push(commonPorts[Math.floor(Math.random() * commonPorts.length)]);
-  }
-  return [...new Set(selected)].sort((a, b) => a - b);
-}
-
-function generateHostname() {
-  const prefixes = ['web', 'mail', 'ftp', 'vpn', 'gateway', 'router'];
-  const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
-  return `${prefix}.example.com`;
-}
-
+// Initialize
 window.addEventListener('load', function() {
-  addLog('🦉 GEOFFREY v3.0 initialized.');
-  addLog('🛡️ Defensive monitoring active.');
-  
-  const savedUser = localStorage.getItem('geoffrey_user');
-  if (savedUser) {
-    userData = JSON.parse(savedUser);
-    addLog(`✓ Welcome back, ${userData.name}!`);
-  }
-  
-  scanNetwork();
-  runThreatScan();
+    addLog('success', '🦉 GEOFFREY v4.0 initialized.');
+    addLog('info', '🛡️ Defensive monitoring active.');
+    addLog('info', '📡 Network scan initiated.');
+    
+    // Render threats
+    renderThreats('overview-threats', 3);
+    renderThreats('live-threats');
+    
+    // Update network stats
+    updateNetworkStats();
+    
+    // Add initial logs
+    setTimeout(() => addLog('info', 'System baseline established'), 1000);
+    setTimeout(() => addLog('success', 'All defensive systems online'), 2000);
+    setTimeout(() => addLog('warning', 'Monitoring 12 potential threats'), 3000);
+    
+    // Periodic updates
+    setInterval(() => {
+        updateNetworkStats();
+        if (Math.random() > 0.7) {
+            addLog('info', `Network activity: ${Math.floor(Math.random() * 100)} packets/sec`);
+        }
+    }, 5000);
+    
+    setInterval(updateThreatCount, 10000);
 });
 </script>
 
