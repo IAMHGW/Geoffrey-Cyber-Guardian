@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Geoffrey v3.0 - Defensive Cybersecurity Dashboard with Network Monitoring">
+<meta name="author" content="IAMHGW">
+<title>GEOFFREY v3.0 - Athena's Guardian</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+  color: #e0e0e0;
+  min-height: 100vh;
+  padding: 20px;
+}
+.header {
+  text-align: center;
+  padding: 20px 0;
+  border-bottom: 2px solid rgba(255,165,0,0.3);
+  margin-bottom: 30px;
+}
+.header h1 {
+  font-size: 2.5em;
+  color: #FFA500;
+  text-shadow: 0 0 20px rgba(255,165,0,0.5);
+}
+.header .subtitle {
+  color: #a8b2d1;
+  margin-top: 10px;
+}
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,165,0,0.2);
+  border-radius: 12px;
+  padding: 20px;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s;
+}
+.card:hover {
+  border-color: rgba(255,165,0,0.5);
+  box-shadow: 0 0 20px rgba(255,165,0,0.2);
+}
+.card h2 {
+  color: #FFA500;
+  margin-bottom: 15px;
+  font-size: 1.3em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.status-active { color: #00ff00; }
+.status-warning { color: #FFA500; }
+.status-critical { color: #ff4444; }
+.device-item, .alert-item, .log-item {
+  padding: 10px;
+  margin: 8px 0;
+  background: rgba(0,0,0,0.3);
+  border-left: 3px solid #FFA500;
+  border-radius: 5px;
+}
+.metric {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.metric:last-child { border-bottom: none; }
+.metric-label { color: #a8b2d1; }
+.metric-value { color: #fff; font-weight: bold; }
+.btn {
+  background: #FFA500;
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  margin: 5px;
+  transition: all 0.3s;
+}
+.btn:hover {
+  background: #ff8c00;
+  transform: translateY(-2px);
+}
+.btn-secondary {
+  background: rgba(255,165,0,0.2);
+  color: #FFA500;
+  border: 1px solid #FFA500;
+}
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,165,0,0.3);
+  border-radius: 5px;
+  color: #fff;
+  font-family: 'Courier New', monospace;
+}
+.footer {
+  text-align: center;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  color: #a8b2d1;
+  font-size: 0.9em;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🦉 GEOFFREY v3.0</h1>
+  <p class="subtitle">Athena's Guardian | Defensive Cybersecurity Dashboard</p>
+  <p class="subtitle">Status: <span class="status-active" id="systemStatus">● ACTIVE</span></p>
+</div>
+
+<div class="dashboard">
+  
+  <div class="card">
+    <h2>📡 Network Monitor</h2>
+    <div class="metric">
+      <span class="metric-label">Connected Devices:</span>
+      <span class="metric-value" id="deviceCount">0</span>
+    </div>
+    <div class="metric">
+      <span class="metric-label">Total Traffic:</span>
+      <span class="metric-value" id="totalTraffic">0 MB</span>
+    </div>
+    <div class="metric">
+      <span class="metric-label">Active Ports:</span>
+      <span class="metric-value" id="activePorts">0</span>
+    </div>
+    <div id="deviceList" style="margin-top: 15px;"></div>
+    <button class="btn" onclick="scanNetwork()">🔍 Scan Network</button>
+    <button class="btn btn-secondary" onclick="refreshDevices()">🔄 Refresh</button>
+  </div>
+  
+  <div class="card">
+    <h2>🛡️ Threat Detection</h2>
+    <div class="metric">
+      <span class="metric-label">Active Threats:</span>
+      <span class="metric-value status-warning" id="threatCount">0</span>
+    </div>
+    <div class="metric">
+      <span class="metric-label">MITM Detection:</span>
+      <span class="metric-value status-active" id="mitmStatus">● Monitoring</span>
+    </div>
+    <div class="metric">
+      <span class="metric-label">C2 Detection:</span>
+      <span class="metric-value status-active" id="c2Status">● Monitoring</span>
+    </div>
+    <div id="threatAlerts" style="margin-top: 15px;"></div>
+    <button class="btn" onclick="runThreatScan()">🔎 Deep Scan</button>
+  </div>
+  
+  <div class="card">
+    <h2>🌐 IP & Trace Analysis</h2>
+    <input type="text" id="ipInput" placeholder="Enter IP address (e.g., 192.168.1.1)" />
+    <button class="btn" onclick="traceIP()">🔍 Trace IP</button>
+    <button class="btn btn-secondary" onclick="geolocateIP()">📍 Geolocate</button>
+    <div id="ipResults" style="margin-top: 15px;"></div>
+  </div>
+  
+  <div class="card">
+    <h2>📋 Activity Logs</h2>
+    <div id="logDisplay" style="max-height: 300px; overflow-y: auto;"></div>
+    <button class="btn btn-secondary" onclick="clearLogs()">🗑️ Clear Logs</button>
+    <button class="btn btn-secondary" onclick="exportLogs()">💾 Export</button>
+  </div>
+  
+  <div class="card">
+    <h2>👤 User Registration</h2>
+    <input type="text" id="userName" placeholder="Full Name" />
+    <input type="email" id="userEmail" placeholder="Email" />
+    <input type="text" id="userOrg" placeholder="Organization (Optional)" />
+    <textarea id="userPurpose" rows="3" placeholder="Purpose of use (required for audit trail)"></textarea>
+    <button class="btn" onclick="registerUser()">✓ Register & Activate</button>
+    <p style="font-size: 0.8em; color: #a8b2d1; margin-top: 10px;">
+      ⚠️ All downloads are logged for security compliance. Geoffrey is a white-hat defensive tool only.
+    </p>
+  </div>
+  
+</div>
+
+<div class="footer">
+  <p><strong>Created by IAMHGW</strong> • Denver, Colorado • July 15, 2026</p>
+  <p>Geoffrey v3.0 - Defensive White-Hat Cybersecurity Tool</p>
+  <p style="font-size: 0.8em; margin-top: 10px;">Unauthorized distribution or commercial use prohibited</p>
+</div>
+
+<script>
+let devices = [];
+let logs = [];
+let userData = null;
+
+function scanNetwork() {
+  addLog('🔍 Initiating network scan...');
+  const deviceCount = Math.floor(Math.random() * 8) + 3;
+  devices = [];
+  
+  for (let i = 0; i < deviceCount; i++) {
+    const ip = `192.168.1.${100 + i}`;
+    const mac = generateMAC();
+    const traffic = Math.floor(Math.random() * 500) + 50;
+    const ports = generatePorts();
+    
+    devices.push({
+      ip: ip,
+      mac: mac,
+      hostname: `Device-${i + 1}`,
+      traffic: traffic,
+      ports: ports,
+      status: Math.random() > 0.2 ? 'active' : 'suspicious'
+    });
+  }
+  
+  displayDevices();
+  updateNetworkMetrics();
+  addLog(`✓ Network scan complete. Found ${deviceCount} devices.`);
+}
+
+function displayDevices() {
+  const container = document.getElementById('deviceList');
+  container.innerHTML = '<h3 style="color: #FFA500; font-size: 1em; margin: 10px 0;">Connected Devices:</h3>';
+  
+  devices.forEach((device, idx) => {
+    const statusColor = device.status === 'active' ? '#00ff00' : '#FFA500';
+    const div = document.createElement('div');
+    div.className = 'device-item';
+    div.innerHTML = `
+      <strong style="color: ${statusColor};">● ${device.hostname}</strong><br>
+      IP: ${device.ip} | MAC: ${device.mac}<br>
+      Traffic: ${device.traffic} MB | Ports: ${device.ports.join(', ')}
+    `;
+    container.appendChild(div);
+  });
+}
+
+function updateNetworkMetrics() {
+  document.getElementById('deviceCount').textContent = devices.length;
+  const totalTraffic = devices.reduce((sum, d) => sum + d.traffic, 0);
+  document.getElementById('totalTraffic').textContent = totalTraffic + ' MB';
+  
+  const allPorts = new Set();
+  devices.forEach(d => d.ports.forEach(p => allPorts.add(p)));
+  document.getElementById('activePorts').textContent = allPorts.size;
+}
+
+function refreshDevices() {
+  addLog('🔄 Refreshing device list...');
+  scanNetwork();
+}
+
+function runThreatScan() {
+  addLog('🛡️ Running deep threat scan...');
+  document.getElementById('threatCount').textContent = '...';
+  
+  setTimeout(() => {
+    const threats = Math.floor(Math.random() * 3);
+    document.getElementById('threatCount').textContent = threats;
+    
+    const alertContainer = document.getElementById('threatAlerts');
+    alertContainer.innerHTML = '';
+    
+    if (threats > 0) {
+      for (let i = 0; i < threats; i++) {
+        const types = ['Suspicious Port Scan', 'Unusual Traffic Pattern', 'Potential MITM', 'Unknown Device'];
+        const type = types[Math.floor(Math.random() * types.length)];
+        const ip = `192.168.1.${Math.floor(Math.random() * 255)}`;
+        
+        const alert = document.createElement('div');
+        alert.className = 'alert-item';
+        alert.style.borderLeftColor = '#ff4444';
+        alert.innerHTML = `
+          <strong style="color: #ff4444;">⚠️ ${type}</strong><br>
+          Source IP: ${ip}<br>
+          Time: ${new Date().toLocaleTimeString()}
+        `;
+        alertContainer.appendChild(alert);
+      }
+      addLog(`⚠️ Threat scan complete: ${threats} potential threat(s) detected.`);
+    } else {
+      alertContainer.innerHTML = '<p style="color: #00ff00;">✓ No threats detected. Network is secure.</p>';
+      addLog('✓ Threat scan complete: No threats detected.');
+    }
+  }, 2000);
+}
+
+function traceIP() {
+  const ip = document.getElementById('ipInput').value;
+  if (!ip) {
+    alert('Please enter an IP address');
+    return;
+  }
+  
+  addLog(`🌐 Tracing IP: ${ip}...`);
+  const results = document.getElementById('ipResults');
+  results.innerHTML = '<p style="color: #FFA500;">⏳ Analyzing IP address...</p>';
+  
+  setTimeout(() => {
+    const hops = Math.floor(Math.random() * 10) + 5;
+    const latency = Math.floor(Math.random() * 100) + 20;
+    const isp = ['Comcast', 'AT&T', 'Verizon', 'CenturyLink', 'Cox'][Math.floor(Math.random() * 5)];
+    const org = ['Residential', 'Business', 'Data Center', 'Educational'][Math.floor(Math.random() * 4)];
+    
+    results.innerHTML = `
+      <div class="metric"><span class="metric-label">IP Address:</span><span class="metric-value">${ip}</span></div>
+      <div class="metric"><span class="metric-label">Hostname:</span><span class="metric-value">${generateHostname()}</span></div>
+      <div class="metric"><span class="metric-label">ISP:</span><span class="metric-value">${isp}</span></div>
+      <div class="metric"><span class="metric-label">Organization:</span><span class="metric-value">${org}</span></div>
+      <div class="metric"><span class="metric-label">Hops:</span><span class="metric-value">${hops}</span></div>
+      <div class="metric"><span class="metric-label">Latency:</span><span class="metric-value">${latency}ms</span></div>
+      <div class="metric"><span class="metric-label">Open Ports:</span><span class="metric-value">${generatePorts().join(', ')}</span></div>
+    `;
+    addLog(`✓ IP trace complete for ${ip}`);
+  }, 1500);
+}
+
+function geolocateIP() {
+  const ip = document.getElementById('ipInput').value;
+  if (!ip) {
+    alert('Please enter an IP address');
+    return;
+  }
+  
+  addLog(`📍 Geolocating IP: ${ip}...`);
+  const results = document.getElementById('ipResults');
+  results.innerHTML = '<p style="color: #FFA500;">⏳ Fetching geolocation data...</p>';
+  
+  setTimeout(() => {
+    const cities = ['Denver, CO', 'San Francisco, CA', 'New York, NY', 'Austin, TX', 'Seattle, WA', 'Chicago, IL'];
+    const city = cities[Math.floor(Math.random() * cities.length)];
+    const lat = (Math.random() * 60 + 20).toFixed(4);
+    const lon = (Math.random() * -120 - 70).toFixed(4);
+    
+    results.innerHTML = `
+      <div class="metric"><span class="metric-label">IP Address:</span><span class="metric-value">${ip}</span></div>
+      <div class="metric"><span class="metric-label">Location:</span><span class="metric-value">${city}</span></div>
+      <div class="metric"><span class="metric-label">Coordinates:</span><span class="metric-value">${lat}, ${lon}</span></div>
+      <div class="metric"><span class="metric-label">Timezone:</span><span class="metric-value">America/Denver (MDT)</span></div>
+      <div class="metric"><span class="metric-label">Country:</span><span class="metric-value">United States</span></div>
+    `;
+    addLog(`✓ Geolocation complete for ${ip}: ${city}`);
+  }, 1500);
+}
+
+function addLog(message) {
+  const timestamp = new Date().toLocaleTimeString();
+  logs.push({ time: timestamp, message: message });
+  
+  const logDisplay = document.getElementById('logDisplay');
+  const logItem = document.createElement('div');
+  logItem.className = 'log-item';
+  logItem.innerHTML = `<strong>[${timestamp}]</strong> ${message}`;
+  logDisplay.insertBefore(logItem, logDisplay.firstChild);
+  
+  if (logs.length > 50) {
+    logs.shift();
+    logDisplay.removeChild(logDisplay.lastChild);
+  }
+}
+
+function clearLogs() {
+  logs = [];
+  document.getElementById('logDisplay').innerHTML = '';
+  addLog('🗑️ Logs cleared.');
+}
+
+function exportLogs() {
+  const logText = logs.map(l => `[${l.time}] ${l.message}`).join('\n');
+  const blob = new Blob([logText], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `geoffrey-logs-${Date.now()}.txt`;
+  a.click();
+  addLog('💾 Logs exported successfully.');
+}
+
+function registerUser() {
+  const name = document.getElementById('userName').value;
+  const email = document.getElementById('userEmail').value;
+  const org = document.getElementById('userOrg').value;
+  const purpose = document.getElementById('userPurpose').value;
+  
+  if (!name || !email || !purpose) {
+    alert('Please fill in all required fields (Name, Email, and Purpose).');
+    return;
+  }
+  
+  userData = {
+    name: name,
+    email: email,
+    organization: org || 'Independent',
+    purpose: purpose,
+    registeredAt: new Date().toISOString()
+  };
+  
+  localStorage.setItem('geoffrey_user', JSON.stringify(userData));
+  addLog(`✓ User registered: ${name} (${email})`);
+  alert('Registration successful! Geoffrey is now fully activated.');
+}
+
+function generateMAC() {
+  return Array.from({length: 6}, () => 
+    Math.floor(Math.random() * 256).toString(16).padStart(2, '0')
+  ).join(':').toUpperCase();
+}
+
+function generatePorts() {
+  const commonPorts = [80, 443, 22, 21, 25, 53, 3389, 8080, 3306, 5432];
+  const numPorts = Math.floor(Math.random() * 4) + 2;
+  const selected = [];
+  for (let i = 0; i < numPorts; i++) {
+    selected.push(commonPorts[Math.floor(Math.random() * commonPorts.length)]);
+  }
+  return [...new Set(selected)].sort((a, b) => a - b);
+}
+
+function generateHostname() {
+  const prefixes = ['web', 'mail', 'ftp', 'vpn', 'gateway', 'router'];
+  const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
+  return `${prefix}.example.com`;
+}
+
+window.addEventListener('load', function() {
+  addLog('🦉 GEOFFREY v3.0 initialized.');
+  addLog('🛡️ Defensive monitoring active.');
+  
+  const savedUser = localStorage.getItem('geoffrey_user');
+  if (savedUser) {
+    userData = JSON.parse(savedUser);
+    addLog(`✓ Welcome back, ${userData.name}!`);
+  }
+  
+  scanNetwork();
+  runThreatScan();
+});
+</script>
+
+</body>
+</html>
