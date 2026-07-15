@@ -1600,6 +1600,151 @@ window.addEventListener('load', function() {
     
     setInterval(updateThreatCount, 12000);
 });
+
+        // 🔍 HONEYPOT - "I'M WATCHING YOU" Attacker Monitoring System
+    // StickyKeys-style trap for detecting suspicious behavior
+    const attackerMonitor = {
+        suspiciousActions: [],
+        alertThreshold: 3,
+        
+        init() {
+            // Monitor suspicious key combinations
+            document.addEventListener('keydown', (e) => {
+                // Detect multiple Shift key presses (StickyKeys activation)
+                if (e.key === 'Shift' && e.repeat) {
+                    this.logSuspiciousActivity('StickyKeys activation attempt', {
+                        timestamp: new Date().toISOString(),
+                        keyCode: e.keyCode,
+                        repeated: true
+                    });
+                }
+                
+                // Detect common hacker key sequences
+                const hackerKeys = ['F12', 'F11', 'Control', 'Alt'];
+                if (hackerKeys.includes(e.key) && (e.ctrlKey || e.shiftKey)) {
+                    this.logSuspiciousActivity('Developer tools attempt', {
+                        timestamp: new Date().toISOString(),
+                        key: e.key,
+                        ctrlKey: e.ctrlKey,
+                        shiftKey: e.shiftKey
+                    });
+                }
+            });
+            
+            // Monitor right-click attempts
+            document.addEventListener('contextmenu', (e) => {
+                this.logSuspiciousActivity('Context menu attempt', {
+                    timestamp: new Date().toISOString(),
+                    target: e.target.tagName
+                });
+            });
+            
+            // Monitor console access attempts
+            this.detectConsoleAccess();
+        },
+        
+        logSuspiciousActivity(action, details) {
+            const log = {
+                action,
+                details,
+                userAgent: navigator.userAgent,
+                ip: 'Logged remotely'
+            };
+            
+            this.suspiciousActions.push(log);
+            
+            // Visual warning to attacker
+            if (this.suspiciousActions.length >= this.alertThreshold) {
+                this.showWatchingYouAlert();
+            }
+            
+            // Log to console (and potentially send to server)
+            console.warn('⚠️ SUSPICIOUS ACTIVITY DETECTED:', log);
+            addLog('warning', `🚨 Suspicious activity: ${action}`);
+        },
+        
+        showWatchingYouAlert() {
+            // Create dramatic "I'm watching you" overlay
+            const overlay = document.createElement('div');
+            overlay.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(255, 0, 0, 0.95);
+                color: white;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                z-index: 999999;
+                font-family: 'Courier New', monospace;
+                animation: pulse 1s infinite;
+            `;
+            
+            overlay.innerHTML = `
+                <div style="text-align: center;">
+                    <h1 style="font-size: 72px; margin: 20px; text-shadow: 0 0 20px red;">👁️ I'M WATCHING YOU 👁️</h1>
+                    <h2 style="font-size: 36px; margin: 20px;">SUSPICIOUS ACTIVITY DETECTED</h2>
+                    <p style="font-size: 24px; margin: 20px;">Your actions have been logged and reported.</p>
+                    <p style="font-size: 20px; margin: 10px;">IP Address: ${this.getPublicIP()}</p>
+                    <p style="font-size: 20px; margin: 10px;">Time: ${new Date().toLocaleString()}</p>
+                    <p style="font-size: 18px; margin: 20px; color: #ffff00;">Incident ID: ${this.generateIncidentID()}</p>
+                    <button onclick="this.parentElement.parentElement.remove()" style="
+                        margin-top: 30px;
+                        padding: 15px 40px;
+                        font-size: 20px;
+                        background: black;
+                        color: white;
+                        border: 2px solid white;
+                        cursor: pointer;
+                        font-family: 'Courier New', monospace;
+                    ">I UNDERSTAND</button>
+                </div>
+            `;
+            
+            document.body.appendChild(overlay);
+            
+            // Auto-remove after 10 seconds
+            setTimeout(() => overlay.remove(), 10000);
+        },
+        
+        getPublicIP() {
+            // In production, this would fetch actual IP
+            return 'XXX.XXX.XXX.XXX (Logged)';
+        },
+        
+        generateIncidentID() {
+            return 'INC-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+        },
+        
+        detectConsoleAccess() {
+            // Honeypot console trap
+            const devtools = { isOpen: false };
+            const threshold = 160;
+            
+            setInterval(() => {
+                if (window.outerWidth - window.innerWidth > threshold || 
+                    window.outerHeight - window.innerHeight > threshold) {
+                    if (!devtools.isOpen) {
+                        devtools.isOpen = true;
+                        this.logSuspiciousActivity('DevTools opened', {
+                            timestamp: new Date().toISOString(),
+                            screenSize: `${window.innerWidth}x${window.innerHeight}`
+                        });
+                    }
+                } else {
+                    devtools.isOpen = false;
+                }
+            }, 500);
+        }
+    };
+    
+    // Initialize the monitoring system
+    attackerMonitor.init();
+    addLog('success', '🔒 Honeypot monitoring system activated');
+
 </script>
 
 </body>
