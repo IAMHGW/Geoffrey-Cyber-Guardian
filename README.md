@@ -24,7 +24,7 @@ Geoffrey operates under a white-hat ethical framework with:
 
 ## Creator
 
-**Created by: Anthony Inman**
+**Created by: IAMHGW**
 
 Born in Denver, Colorado - December 2024
 
@@ -41,4 +41,4 @@ Simply open `index.html` in a modern web browser to awaken Geoffrey and begin mo
 
 ## License
 
-All rights reserved - Anthony Inman © 2024
+All rights reserved - IAMHGW 2024
