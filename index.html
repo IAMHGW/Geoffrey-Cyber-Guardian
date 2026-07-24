@@ -1165,6 +1165,25 @@ body {
             
             <h3 style="color: #a8b2d1; margin: 35px 0 18px; font-size: 1.4em;">🔌 Active Connections</h3>
             <div id="connections-list"></div>
+
+                <h3 style="color: #a8b2d1; margin: 35px 0 18px; font-size: 1.4em;">📶 Connected Devices</h3>
+                <div id="devices-list"></div>
+
+                <h3 style="color: #a8b2d1; margin: 35px 0 18px; font-size: 1.4em;">📊 Data Usage by Device</h3>
+                <div style="overflow-x:auto;">
+                <table style="width:100%; border-collapse: collapse; background: rgba(0,0,0,0.3); border-radius: 10px; overflow: hidden;">
+                    <thead>
+                        <tr style="background: rgba(255,165,0,0.15);">
+                            <th style="padding:12px 15px; text-align:left; color:#FFA500; font-size:0.85em; text-transform:uppercase; letter-spacing:0.5px;">Device</th>
+                            <th style="padding:12px 15px; text-align:left; color:#FFA500; font-size:0.85em; text-transform:uppercase; letter-spacing:0.5px;">Connection</th>
+                            <th style="padding:12px 15px; text-align:left; color:#FFA500; font-size:0.85em; text-transform:uppercase; letter-spacing:0.5px;">Downloaded</th>
+                            <th style="padding:12px 15px; text-align:left; color:#FFA500; font-size:0.85em; text-transform:uppercase; letter-spacing:0.5px;">Uploaded</th>
+                            <th style="padding:12px 15px; text-align:left; color:#FFA500; font-size:0.85em; text-transform:uppercase; letter-spacing:0.5px;">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="data-usage-table"></tbody>
+                </table>
+                </div>
         </div>
     </div>
 
@@ -1709,6 +1728,45 @@ function updateNetworkStats() {
             </div>
         </div>
     `).join('');
+
+        const devices = [
+            { name: 'IAMHGW-iPhone', type: '📱', connection: 'WiFi 6 - 5GHz', network: 'Geoffrey_5G_Secure', signal: 'Excellent', ip: '192.168.1.42', download: '128.4 MB', upload: '22.1 MB' },
+            { name: 'Denver-MacBook-Pro', type: '💻', connection: 'WiFi 6 - 5GHz', network: 'Geoffrey_5G_Secure', signal: 'Excellent', ip: '192.168.1.15', download: '512.7 MB', upload: '89.3 MB' },
+            { name: 'Living-Room-SmartTV', type: '📺', connection: 'WiFi - 2.4GHz', network: 'Geoffrey_IoT', signal: 'Good', ip: '192.168.1.78', download: '1.2 GB', upload: '4.6 MB' },
+            { name: 'Workstation-05', type: '🖥️', connection: 'Ethernet', network: 'Wired LAN', signal: 'Excellent', ip: '192.168.1.100', download: '340.2 MB', upload: '156.8 MB' },
+            { name: 'IAMHGW-Pixel', type: '📱', connection: 'Cellular - 5G', network: 'Verizon 5G UW', signal: 'Strong', ip: '10.42.18.203', download: '89.5 MB', upload: '12.4 MB' },
+            { name: 'Nest-Thermostat', type: '🌡️', connection: 'WiFi - 2.4GHz', network: 'Geoffrey_IoT', signal: 'Fair', ip: '192.168.1.91', download: '2.1 MB', upload: '1.8 MB' }
+        ];
+
+        const devicesList = document.getElementById('devices-list');
+        if (devicesList) {
+            devicesList.innerHTML = devices.map(d => `
+                <div class="threat-card low">
+                    <div class="threat-header">
+                        <div class="threat-title">${d.type} ${d.name}</div>
+                        <span class="threat-severity low">${d.signal}</span>
+                    </div>
+                    <div class="threat-meta">
+                        <span>📡 ${d.connection}</span>
+                        <span>📤 ${d.network}</span>
+                        <span>🌐 ${d.ip}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        const dataUsageTable = document.getElementById('data-usage-table');
+        if (dataUsageTable) {
+            dataUsageTable.innerHTML = devices.map((d, i) => `
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.08); ${i % 2 === 0 ? 'background: rgba(255,255,255,0.02);' : ''}">
+                    <td style="padding:12px 15px; color:#e0e0e0;">${d.type} ${d.name}</td>
+                    <td style="padding:12px 15px; color:#a8b2d1;">${d.connection}</td>
+                    <td style="padding:12px 15px; color:#4CAF50; font-weight:600;">⬇️ ${d.download}</td>
+                    <td style="padding:12px 15px; color:#FFA500; font-weight:600;">⬆️ ${d.upload}</td>
+                    <td style="padding:12px 15px;"><span class="threat-severity low">Active</span></td>
+                </tr>
+            `).join('');
+        }
 }
 
 // Update threat count
