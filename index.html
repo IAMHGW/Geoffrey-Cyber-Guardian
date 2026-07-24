@@ -1534,60 +1534,6 @@ function monitorThreat(ip) {
 
 function analyzeThreat(ip) {
     addLog('info', `🧬 ANALYZE: Deep forensic analysis started for ${ip}`);
- function quarantineThreat(ip) {
-    addLog('error', `🔒 QUARANTINE: Threat from ${ip} isolated in secure sandbox`);
-    const report = createReport(ip, 'quarantine', '🔒', 'Quarantine', [
-        'Threat container spun up in isolated VLAN sandbox (no route to production network)',
-        'All active sockets from ' + ip + ' forcibly terminated',
-        'Payload snapshot captured for static analysis',
-        'Sandbox will self-destruct in 24h unless escalated'
-    ], 'Contained. No further action required unless payload is confirmed malicious.');
-    alert(`Threat Quarantined!\n\nIP ${ip} has been isolated in a secure sandbox environment. All connections terminated and forensic analysis initiated.\n\nFull breakdown available in Reports & Actions tab.`);
-    renderReports();
-}
-
-function blockThreat(ip) {
-    addLog('warning', `🚫 BLOCKED: Firewall rules updated to block ${ip}`);
-    const report = createReport(ip, 'block', '🚫', 'Block', [
-        'New DENY rule appended to perimeter firewall for ' + ip,
-        'Rule propagated to all edge nodes (~3s convergence)',
-        'Existing sessions from this IP dropped immediately',
-        'Block is permanent until manually reviewed and lifted'
-    ], 'Access denied at network edge. IP can no longer reach any internal service.');
-    alert(`Threat Blocked!\n\nIP ${ip} has been permanently blocked at the firewall level. All future connection attempts will be denied.\n\nFull breakdown available in Reports & Actions tab.`);
-    renderReports();
-}
-
-function traceThreat(ip) {
-    addLog('info', `🔍 TRACE: Analyzing packet route and origin for ${ip}`);
-    const hops = Math.floor(Math.random() * 6) + 8;
-    const isp = ['DigitalOcean LLC', 'OVH SAS', 'Hetzner Online', 'Choopa LLC', 'Alibaba Cloud'][Math.floor(Math.random()*5)];
-    const report = createReport(ip, 'trace', '🔍', 'Trace Route', [
-        `Passive traceroute completed in ${hops} hops`,
-        `Hosting provider identified: ${isp}`,
-        'Reverse DNS and WHOIS records cross-referenced',
-        'Threat actor infrastructure fingerprint added to intel database',
-        'No packets were sent to the attacker — this was a passive, read-only lookup'
-    ], 'Origin infrastructure mapped. Recommend cross-referencing with known threat actor groups.', true);
-    alert(`Trace Route Initiated\n\nAnalyzing network path for ${ip}\nGeolocation tracking activated\nISP identification in progress\nThreat actor profiling initiated\n\nFull breakdown + hook option available in Reports & Actions tab.`);
-    renderReports();
-}
-
-function monitorThreat(ip) {
-    addLog('info', `📡 MONITOR: Real-time surveillance activated for ${ip}`);
-    const report = createReport(ip, 'monitor', '📡', 'Monitor', [
-        'Passive traffic-mirroring tap attached to ' + ip + '\'s inbound/outbound flows',
-        'A lightweight watcher process ("Trojan Horse" bait module) is deployed to observe attacker behavior only',
-        'Watcher has NO write/execute privileges on the attacker\'s system — observation only, zero interference',
-        'Behavioral telemetry (keystroke timing, tool signatures, retry patterns) streamed to Activity Log',
-        'Auto-expires in 6 hours or when attacker goes dark, whichever comes first'
-    ], 'Silent observation active. Attacker is unaware they are being watched. No interference performed.', true);
-    alert(`Active Monitoring Enabled\n\nReal-time surveillance activated for ${ip}\n- Network traffic analysis\n- Behavioral pattern detection\n- Automated alert triggers\n- Continuous threat assessment\n\n⚠️ This deploys a passive watcher (no interference) — see Reports & Actions tab for details.`);
-    renderReports();
-}
-
-function analyzeThreat(ip) {
-    addLog('info', `🧬 ANALYZE: Deep forensic analysis started for ${ip}`);
     const cve = 'CVE-2026-' + (Math.floor(Math.random()*9000)+1000);
     const report = createReport(ip, 'analyze', '🧬', 'Deep Analysis', [
         'Reconnaissance sweep launched against ' + ip + ' — open ports, banners, and service versions enumerated',
@@ -1599,8 +1545,7 @@ function analyzeThreat(ip) {
     alert(`Deep Analysis Initiated\n\nForensic investigation underway for ${ip}\n- Malware signature analysis\n- Attack vector identification\n- Vulnerability assessment\n- Threat intelligence correlation\n\nFull recon dossier + hook option available in Reports & Actions tab.`);
     renderReports();
 }
-
-// ===== Reports & Actions System =====
+    // ===== Reports & Actions System =====
 let actionReports = [];
 let reportCounter = 0;
 
