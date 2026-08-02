@@ -2172,6 +2172,23 @@ window.addEventListener('load', function() {
     addLog('success', '🔒 Honeypot monitoring system activated');
 
 </script>
+<script>
+// Failsafe: force-hide intro screen even if earlier scripts error
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    try {
+      var intro = document.getElementById('intro-screen');
+      if (intro) {
+        intro.classList.add('hidden');
+        setTimeout(function(){ intro.style.display = 'none'; }, 1000);
+      }
+      document.querySelectorAll('.container').forEach(function(c){ c.style.opacity = '1'; });
+    } catch (e) {
+      console.error('Failsafe intro-hide error:', e);
+    }
+  }, 4500);
+});
+</script>
 
 </body>
 </html>
