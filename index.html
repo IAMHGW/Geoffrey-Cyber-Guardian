@@ -1045,12 +1045,12 @@ body {
 
     <!-- Tab Navigation -->
     <div class="tab-nav">
-        <button class="tab-button active" onclick="switchTab('overview')">📊 Overview</button>
-        <button class="tab-button" onclick="switchTab('threats')">⚠️ Live Threats</button>
-        <button class="tab-button" onclick="switchTab('network')">🌐 Network</button>
-        <button class="tab-button" onclick="switchTab('comparison')">🏆 Competitive Edge</button>
-        <button class="tab-button" onclick="switchTab('logs')">📝 Activity Logs</button>
-        <button class="tab-button" onclick="switchTab('reports')">📋 Reports & Actions</button>
+        <button class="tab-button active" onclick="switchTab('overview', this)">📊 Overview</button>
+        <button class="tab-button" onclick="switchTab('threats', this)">⚠️ Live Threats</button>
+        <button class="tab-button" onclick="switchTab('network', this)">🌐 Network</button>
+        <button class="tab-button" onclick="switchTab('comparison', this)">🏆 Competitive Edge</button>
+        <button class="tab-button" onclick="switchTab('logs', this)">📝 Activity Logs</button>
+        <button class="tab-button" onclick="switchTab('reports', this)">📋 Reports & Actions</button>
     </div>
 
     <!-- Overview Tab -->
@@ -1283,15 +1283,15 @@ setTimeout(() => {
 }, 4000);
 
 // Tab switching
-function switchTab(tabName) {
-    const tabs = document.querySelectorAll('.tab-content');
+function switchTab(tabName, btnEl) {
+        const tabs = document.querySelectorAll('.tab-content');
     tabs.forEach(tab => tab.classList.remove('active'));
     
     const buttons = document.querySelectorAll('.tab-button');
     buttons.forEach(btn => btn.classList.remove('active'));
     
     document.getElementById(tabName + '-tab').classList.add('active');
-    event.target.classList.add('active');
+    (btnEl || event.target).classList.add('active');
     
     addLog('info', `Switched to ${tabName.charAt(0).toUpperCase() + tabName.slice(1)} tab`);
 }
